@@ -58,13 +58,23 @@ const configuredClientOrigins = (process.env.CLIENT_URL || '')
   .map((origin) => origin.trim())
   .filter(Boolean);
 
+const defaultAllowedOrigins = [
+  'https://auroralivingdesigns.vercel.app',
+  'https://auroralivingdesigns-cvj6.vercel.app',
+];
+
+const allowedOrigins = new Set([
+  ...defaultAllowedOrigins,
+  ...configuredClientOrigins,
+]);
+
 app.use(
   cors({
     origin: (origin, callback) => {
       // Allow server-to-server requests and local development origins.
       if (!origin) return callback(null, true);
-      if (configuredClientOrigins.length > 0) {
-        return callback(null, configuredClientOrigins.includes(origin));
+      if (allowedOrigins.has(origin)) {
+        return callback(null, true);
       }
       if (/^https?:\/\/(localhost|127\.0\.0\.1):\d+$/.test(origin)) {
         return callback(null, true);
