@@ -1,50 +1,141 @@
 'use client';
-import { motion } from 'framer-motion';
 
-const testimonials = [
+const reviews = [
   {
-    text: 'The ceiling medallion they crafted for our drawing room is nothing short of extraordinary. The detail work is museum-quality. Our architect was speechless.',
-    author: 'Zara Mahmood',
-    location: 'Defence Housing Authority, Lahore',
+    name: 'Sana Malik',
+    location: 'Lahore',
+    stars: 5,
+    text: 'Ordered a 3-tier fountain for our farmhouse. The quality is unreal — solid, heavy, beautifully finished. Got so many compliments from guests.',
   },
   {
-    text: 'We ordered a custom fountain for our corporate lobby. The craftsmanship, the finish, the delivery — everything was flawless. Worth every rupee.',
-    author: 'Bilal Chaudhry',
-    location: 'Gulberg III, Lahore',
+    name: 'Ahmed Raza',
+    location: 'Karachi',
+    stars: 5,
+    text: 'Custom ceiling medallion for our drawing room. They matched the reference exactly. Delivery was on time and packaging was excellent.',
   },
   {
-    text: 'Working with Aurora on our boutique hotel project was a pleasure. They understood the aesthetic immediately and delivered pieces that elevated every space.',
-    author: 'Nadia Khawaja',
-    location: 'Interior Designer, Karachi',
+    name: 'Fatima Noor',
+    location: 'Islamabad',
+    stars: 5,
+    text: 'Bought two lion head planters. They look straight out of an Italian villa. Will definitely order again.',
+  },
+  {
+    name: 'Bilal Chaudhry',
+    location: 'Faisalabad',
+    stars: 4,
+    text: 'Great craftsmanship. Slight delay in delivery but the final product was worth the wait. Highly recommend for outdoor decor.',
+  },
+  {
+    name: 'Hina Tariq',
+    location: 'Lahore',
+    stars: 5,
+    text: 'The attention to detail is incredible. You can tell real artisans made this — not a factory. Our garden looks transformed.',
+  },
+  {
+    name: 'Usman Shah',
+    location: 'Rawalpindi',
+    stars: 5,
+    text: 'Ordered a custom birdbath. They sent photos at every stage of production. The communication was excellent and the result was perfect.',
+  },
+  {
+    name: 'Maryam Iqbal',
+    location: 'Multan',
+    stars: 5,
+    text: 'I was skeptical ordering online but the fountain arrived exactly as shown, packed perfectly. Installation guide was clear and easy to follow.',
+  },
+  {
+    name: 'Tariq Mehmood',
+    location: 'Peshawar',
+    stars: 4,
+    text: 'Good quality concrete, well-finished. A little heavy to move around but that is expected. Solid purchase for anyone serious about garden aesthetics.',
   },
 ];
 
-export default function Testimonials() {
+function Stars({ count }: { count: number }) {
   return (
-    <section className="py-24 px-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="section-label">Client Stories</div>
-        <h2 className="font-playfair text-3xl md:text-4xl font-normal mb-4">What Our Clients Say</h2>
-        <div className="gold-divider mb-12" />
-        <div className="grid md:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => (
-            <motion.div
-              key={t.author}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="bg-aurora-card border border-[rgba(240,192,64,0.18)] p-7 relative"
-            >
-              <div className="font-playfair text-6xl text-gold-dark absolute top-4 right-5 opacity-40 leading-none">"</div>
-              <div className="text-gold text-xs tracking-widest mb-4">★★★★★</div>
-              <p className="text-aurora-muted text-sm leading-[1.85] italic font-light mb-5">{t.text}</p>
-              <div className="text-[0.78rem] tracking-[0.12em] uppercase text-gold">{t.author}</div>
-              <div className="text-aurora-muted text-xs mt-1">{t.location}</div>
-            </motion.div>
+    <div className="flex gap-0.5 mb-3">
+      {[1, 2, 3, 4, 5].map((i) => (
+        <span key={i} className={i <= count ? 'text-gold' : 'text-[#333]'} style={{ fontSize: '13px' }}>
+          ★
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function ReviewCard({ review }: { review: (typeof reviews)[0] }) {
+  return (
+    <div
+      className="bg-[#111111] border border-[rgba(240,192,64,0.15)] p-6 relative flex-shrink-0 w-[300px] md:w-[340px]"
+      style={{ margin: '0 12px' }}
+    >
+      <div
+        className="font-playfair text-5xl text-gold absolute top-3 right-5 opacity-25 leading-none select-none"
+        aria-hidden
+      >
+        "
+      </div>
+      <Stars count={review.stars} />
+      <p className="text-[#c8c8c0] text-sm leading-[1.85] italic font-light mb-5 pr-4">{review.text}</p>
+      <div className="text-gold text-[0.72rem] tracking-[0.15em] uppercase">{review.name}</div>
+      <div className="text-aurora-muted text-xs mt-0.5">{review.location}</div>
+    </div>
+  );
+}
+
+export default function Testimonials() {
+  // Duplicate reviews for seamless loop
+  const row1 = [...reviews, ...reviews];
+  const row2 = [...reviews, ...reviews];
+
+  return (
+    <section className="py-24 overflow-hidden">
+      <div className="max-w-6xl mx-auto px-6 mb-12 text-center">
+        <div className="section-label justify-center">Client Stories</div>
+        <h2 className="font-playfair text-3xl md:text-4xl font-normal mt-2">
+          What Our Clients Say
+        </h2>
+        <div className="gold-divider mt-6 max-w-xs mx-auto" />
+      </div>
+
+      {/* Row 1 — scrolls left */}
+      <div className="reviews-wrapper mb-4" style={{ overflow: 'hidden' }}>
+        <div className="reviews-track reviews-track-left" style={{ display: 'flex', width: 'max-content' }}>
+          {row1.map((r, i) => (
+            <ReviewCard key={`r1-${i}`} review={r} />
           ))}
         </div>
       </div>
+
+      {/* Row 2 — scrolls right */}
+      <div className="reviews-wrapper" style={{ overflow: 'hidden' }}>
+        <div className="reviews-track reviews-track-right" style={{ display: 'flex', width: 'max-content' }}>
+          {row2.map((r, i) => (
+            <ReviewCard key={`r2-${i}`} review={r} />
+          ))}
+        </div>
+      </div>
+
+      <style jsx>{`
+        @keyframes marquee-left {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        @keyframes marquee-right {
+          0%   { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
+        .reviews-track-left {
+          animation: marquee-left 35s linear infinite;
+        }
+        .reviews-track-right {
+          animation: marquee-right 35s linear infinite;
+        }
+        .reviews-wrapper:hover .reviews-track-left,
+        .reviews-wrapper:hover .reviews-track-right {
+          animation-play-state: paused;
+        }
+      `}</style>
     </section>
   );
 }

@@ -1,6 +1,11 @@
 import Link from 'next/link';
 import Hero from '@/components/sections/Hero';
+import StatsBar from '@/components/sections/StatsBar';
 import Testimonials from '@/components/sections/Testimonials';
+import ProcessSection from '@/components/sections/ProcessSection';
+import FAQSection from '@/components/sections/FAQSection';
+import GalleryStrip from '@/components/sections/GalleryStrip';
+import CTABanner from '@/components/sections/CTABanner';
 import Footer from '@/components/layout/Footer';
 import api from '@/lib/api';
 import ProductCard from '@/components/ui/ProductCard';
@@ -131,23 +136,23 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Stats / Trust Bar */}
+      <StatsBar />
+
+      {/* How It's Made — Process */}
+      <ProcessSection />
+
+      {/* Testimonials — marquee */}
       <Testimonials />
 
-      {/* CTA strip */}
-      <section className="bg-aurora-card border-y border-[rgba(240,192,64,0.2)] py-16 px-6">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <div className="section-label">Get in Touch</div>
-            <h2 className="font-playfair text-2xl md:text-3xl font-normal">Ready to commission a piece?</h2>
-          </div>
-          <div className="flex gap-4 flex-wrap">
-            <Link href="/contact" className="btn-primary">Contact Us</Link>
-            <a href="https://wa.me/923001234567" target="_blank" rel="noreferrer" className="btn-ghost">
-              WhatsApp Us
-            </a>
-          </div>
-        </div>
-      </section>
+      {/* FAQ Section */}
+      <FAQSection />
+
+      {/* Instagram / Gallery Strip */}
+      <GalleryStrip />
+
+      {/* CTA Banner */}
+      <CTABanner />
 
       <Footer />
     </>
