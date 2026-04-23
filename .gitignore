@@ -25,6 +25,9 @@ dist/
 build/
 client/build/
 server/build/
+client/.next/
+client/out/
+client/.turbo/
 
 # Logs
 logs
