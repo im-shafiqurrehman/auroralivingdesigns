@@ -78,6 +78,10 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(async (req, res, next) => {
+  if (req.path === '/health' || req.path === '/api/health') {
+    return next();
+  }
+
   try {
     await ensureMongoConnection();
     next();
