@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./app/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './lib/**/*.{js,ts,jsx,tsx}',
+  ],
   theme: {
     extend: {
       colors: {
@@ -14,8 +18,40 @@ module.exports = {
         'aurora-muted': '#a89f8c',
       },
       fontFamily: {
-        playfair: ['Playfair Display', 'serif'],
-        cormorant: ['Cormorant Garamond', 'serif'],
+        playfair: ['var(--font-playfair)', 'Playfair Display', 'serif'],
+        cormorant: ['var(--font-cormorant)', 'Cormorant Garamond', 'serif'],
+      },
+      transitionDuration: {
+        400: '400ms',
+      },
+      keyframes: {
+        'marquee-left': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+        'marquee-right': {
+          '0%': { transform: 'translateX(-50%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        'fade-up': {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'count-up': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+      },
+      animation: {
+        'marquee-left': 'marquee-left 35s linear infinite',
+        'marquee-right': 'marquee-right 35s linear infinite',
+        'fade-up': 'fade-up 0.6s ease-out forwards',
+      },
+      backgroundImage: {
+        'gold-gradient':
+          'linear-gradient(135deg, #f0c040 0%, #b8942a 50%, #f0c040 100%)',
+        'diagonal-lines':
+          'repeating-linear-gradient(45deg, #1a1400 0px, #1a1400 1px, transparent 1px, transparent 8px)',
       },
     },
   },

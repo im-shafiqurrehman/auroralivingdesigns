@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import Link from 'next/link';
 import api from '@/lib/api';
 import toast from 'react-hot-toast';
@@ -44,33 +44,36 @@ function Toggle({
   );
 }
 
-const INITIAL_FORM = {
-  name: '',
-  slug: '',
-  category: '',
-  shortDescription: '',
-  longDescription: '',
-  price: '',
-  dimensions: '',
-  weight: '',
-  material: '',
-  inStock: true,
-  featured: false,
-};
-
-export default function NewProductPage() {
+export default function EditProductPage() {
   const router = useRouter();
+  const { id } = useParams<{ id: string }>();
+
   const [categories, setCategories] = useState<any[]>([]);
   const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [slugEdited, setSlugEdited] = useState(false);
   const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
-  const [form, setForm] = useState(INITIAL_FORM);
+  const [existingImages, setExistingImages] = useState<string[]>([]);
 
-  const set = (key: keyof typeof INITIAL_FORM, val: string | boolean) =>
+  const [form, setForm] = useState({
+    name: '',
+    slug: '',
+    category: '',
+    shortDescription: '',
+    longDescription: '',
+    price: '',
+    dimensions: '',
+    weight: '',
+    material: '',
+    inStock: true,
+    featured: false,
+  });
+
+  const set = (key: keyof typeof form, val: string | boolean) =>
     setForm((prev) => ({ ...prev, [key]: val }));
 
-  // Auto-generate slug from name unless user has manually typed one
+  // Auto-slug from name unless user has manually edited it
   useEffect(() => {
     if (!slugEdited && form.name) {
       set('slug', slugify(form.name));
@@ -78,9 +81,33 @@ export default function NewProductPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form.name]);
 
+  // Load categories + product data
   useEffect(() => {
     api.get('/categories').then(({ data }) => setCategories(data)).catch(() => {});
-  }, []);
+    if (id) {
+      api
+        .get(`/products/${id}`)
+        .then(({ data }) => {
+          setForm({
+            name: data.name || '',
+            slug: data.slug || '',
+            category: data.category?._id || '',
+            shortDescription: data.shortDescription || '',
+            longDescription: data.longDescription || '',
+            price: String(data.price || ''),
+            dimensions: data.dimensions || '',
+            weight: data.weight || '',
+            material: data.material || '',
+            inStock: data.inStock ?? true,
+            featured: data.featured ?? false,
+          });
+          setSlugEdited(true);
+          setExistingImages(data.images || []);
+        })
+        .catch(() => toast.error('Could not load product'))
+        .finally(() => setLoading(false));
+    }
+  }, [id]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
@@ -91,11 +118,14 @@ export default function NewProductPage() {
     ]);
   };
 
-  const removeImage = (index: number) => {
+  const removeNewImage = (index: number) => {
     URL.revokeObjectURL(imagePreviews[index]);
     setImageFiles((prev) => prev.filter((_, i) => i !== index));
     setImagePreviews((prev) => prev.filter((_, i) => i !== index));
   };
+
+  const removeExistingImage = (index: number) =>
+    setExistingImages((prev) => prev.filter((_, i) => i !== index));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -108,14 +138,15 @@ export default function NewProductPage() {
       const fd = new FormData();
       Object.entries(form).forEach(([k, v]) => fd.append(k, String(v)));
       imageFiles.forEach((f) => fd.append('images', f));
+      existingImages.forEach((url) => fd.append('existingImages', url));
 
-      await api.post('/products', fd, {
+      await api.put(`/products/${id}`, fd, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-      toast.success('Product created successfully');
+      toast.success('Product updated successfully');
       router.push('/admin/products');
     } catch (err: any) {
-      toast.error(err?.response?.data?.message || 'Failed to create product');
+      toast.error(err?.response?.data?.message || 'Update failed');
     } finally {
       setSaving(false);
     }
@@ -127,6 +158,12 @@ export default function NewProductPage() {
     'block text-[0.7rem] tracking-[0.2em] uppercase text-aurora-muted mb-2';
   const shortDescLen = form.shortDescription.length;
 
+  if (loading) {
+    return (
+      <div className="p-8 text-aurora-muted text-sm">Loading product...</div>
+    );
+  }
+
   return (
     <div className="p-8 max-w-3xl">
       {/* Header */}
@@ -137,14 +174,14 @@ export default function NewProductPage() {
         >
           ← Products
         </Link>
-        <span className="text-[rgba(240,192,64,0.3)]">/</span>
-        <h1 className="font-playfair text-3xl font-normal">Add New Product</h1>
+        <span className="text-[rgba(240,192,64,0.25)]">/</span>
+        <h1 className="font-playfair text-3xl font-normal">Edit Product</h1>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* ── Basic Information ───────────────────────────────────────── */}
+        {/* Basic Info */}
         <div className="bg-aurora-card border border-[rgba(240,192,64,0.18)] p-6 space-y-5">
-          <div className="text-[0.7rem] tracking-[0.2em] uppercase text-gold mb-1">
+          <div className="text-[0.7rem] tracking-[0.2em] uppercase text-gold mb-2">
             Basic Information
           </div>
 
@@ -154,18 +191,16 @@ export default function NewProductPage() {
               required
               type="text"
               className={inputClass}
-              placeholder="3-Tier Classical Garden Fountain"
               value={form.name}
               onChange={(e) => set('name', e.target.value)}
             />
           </div>
 
           <div>
-            <label className={labelClass}>Slug (URL identifier)</label>
+            <label className={labelClass}>Slug (URL)</label>
             <input
               type="text"
               className={inputClass}
-              placeholder="3-tier-classical-garden-fountain"
               value={form.slug}
               onChange={(e) => {
                 setSlugEdited(true);
@@ -185,9 +220,7 @@ export default function NewProductPage() {
               value={form.category}
               onChange={(e) => set('category', e.target.value)}
             >
-              <option value="" className="bg-[#111]">
-                — Select a category —
-              </option>
+              <option value="">— Select a category —</option>
               {categories.map((c: any) => (
                 <option key={c._id} value={c._id} className="bg-[#111]">
                   {c.name}
@@ -203,7 +236,6 @@ export default function NewProductPage() {
               type="number"
               min={0}
               className={inputClass}
-              placeholder="45000"
               value={form.price}
               onChange={(e) => set('price', e.target.value)}
             />
@@ -223,7 +255,6 @@ export default function NewProductPage() {
             <input
               required
               className={inputClass}
-              placeholder="A brief one-line description shown in product listings..."
               value={form.shortDescription}
               onChange={(e) => set('shortDescription', e.target.value)}
               maxLength={180}
@@ -235,16 +266,15 @@ export default function NewProductPage() {
             <textarea
               rows={5}
               className={inputClass + ' resize-none'}
-              placeholder="Full product description — materials, dimensions, installation notes, care instructions..."
               value={form.longDescription}
               onChange={(e) => set('longDescription', e.target.value)}
             />
           </div>
         </div>
 
-        {/* ── Specifications ──────────────────────────────────────────── */}
+        {/* Specifications */}
         <div className="bg-aurora-card border border-[rgba(240,192,64,0.18)] p-6 space-y-5">
-          <div className="text-[0.7rem] tracking-[0.2em] uppercase text-gold mb-1">
+          <div className="text-[0.7rem] tracking-[0.2em] uppercase text-gold mb-2">
             Specifications
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -253,7 +283,7 @@ export default function NewProductPage() {
                 ['dimensions', 'Dimensions', '90cm × 150cm'],
                 ['weight', 'Weight', '85 kg'],
                 ['material', 'Material', 'Portland cement, fiber mesh'],
-              ] as [keyof typeof INITIAL_FORM, string, string][]
+              ] as [keyof typeof form, string, string][]
             ).map(([key, label, placeholder]) => (
               <div key={key}>
                 <label className={labelClass}>{label}</label>
@@ -269,7 +299,7 @@ export default function NewProductPage() {
           </div>
         </div>
 
-        {/* ── Visibility & Stock ──────────────────────────────────────── */}
+        {/* Toggles */}
         <div className="bg-aurora-card border border-[rgba(240,192,64,0.18)] p-6">
           <div className="text-[0.7rem] tracking-[0.2em] uppercase text-gold mb-5">
             Visibility & Stock
@@ -288,30 +318,30 @@ export default function NewProductPage() {
           </div>
         </div>
 
-        {/* ── Product Images ──────────────────────────────────────────── */}
+        {/* Images */}
         <div className="bg-aurora-card border border-[rgba(240,192,64,0.18)] p-6">
           <div className="text-[0.7rem] tracking-[0.2em] uppercase text-gold mb-5">
             Product Images
           </div>
 
-          {/* Image previews */}
-          {imagePreviews.length > 0 && (
+          {/* Existing images */}
+          {existingImages.length > 0 && (
             <div className="mb-5">
-              <p className={labelClass + ' mb-3'}>Selected Images</p>
+              <p className={labelClass + ' mb-3'}>Current Images</p>
               <div className="flex flex-wrap gap-3">
-                {imagePreviews.map((src, i) => (
+                {existingImages.map((url, i) => (
                   <div
                     key={i}
-                    className="relative w-20 h-20 border border-[rgba(240,192,64,0.2)] overflow-hidden"
+                    className="relative w-20 h-20 border border-[rgba(240,192,64,0.2)]"
                   >
                     <img
-                      src={src}
-                      alt={`Preview ${i + 1}`}
+                      src={url}
+                      alt={`img ${i + 1}`}
                       className="w-full h-full object-cover"
                     />
                     <button
                       type="button"
-                      onClick={() => removeImage(i)}
+                      onClick={() => removeExistingImage(i)}
                       className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 text-white text-xs flex items-center justify-center rounded-full hover:bg-red-600 transition-colors"
                     >
                       ×
@@ -322,17 +352,40 @@ export default function NewProductPage() {
             </div>
           )}
 
-          {/* Upload trigger */}
-          <label className="flex items-center gap-4 border border-dashed border-[rgba(240,192,64,0.25)] p-5 cursor-pointer hover:border-gold transition-colors group">
-            <div className="w-10 h-10 border border-[rgba(240,192,64,0.3)] flex items-center justify-center group-hover:border-gold transition-colors">
-              <span className="text-gold text-xl leading-none">+</span>
-            </div>
-            <div>
-              <div className="text-sm text-aurora-muted group-hover:text-aurora-text transition-colors">
-                Click to add product images
+          {/* New image previews */}
+          {imagePreviews.length > 0 && (
+            <div className="mb-5">
+              <p className={labelClass + ' mb-3'}>New Images (to upload)</p>
+              <div className="flex flex-wrap gap-3">
+                {imagePreviews.map((src, i) => (
+                  <div
+                    key={i}
+                    className="relative w-20 h-20 border border-[rgba(240,192,64,0.2)]"
+                  >
+                    <img
+                      src={src}
+                      alt={`new ${i + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeNewImage(i)}
+                      className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 text-white text-xs flex items-center justify-center rounded-full hover:bg-red-600 transition-colors"
+                    >
+                      ×
+                    </button>
+                  </div>
+                ))}
               </div>
+            </div>
+          )}
+
+          <label className="flex items-center gap-3 border border-dashed border-[rgba(240,192,64,0.25)] p-4 cursor-pointer hover:border-gold transition-colors">
+            <span className="text-gold text-xl">+</span>
+            <div>
+              <div className="text-sm text-aurora-muted">Click to add more images</div>
               <div className="text-[0.65rem] text-aurora-muted mt-0.5">
-                JPG, PNG, WebP — max 10 MB each · Multiple allowed
+                JPG, PNG, WebP — max 10 MB each
               </div>
             </div>
             <input
@@ -345,14 +398,14 @@ export default function NewProductPage() {
           </label>
         </div>
 
-        {/* ── Actions ─────────────────────────────────────────────────── */}
-        <div className="flex gap-4 pt-2 pb-8">
+        {/* Actions */}
+        <div className="flex gap-4 pt-2">
           <button
             type="submit"
             disabled={saving}
-            className="btn-primary disabled:opacity-60 min-w-[160px]"
+            className="btn-primary disabled:opacity-60 min-w-[140px]"
           >
-            {saving ? 'Creating...' : 'Create Product'}
+            {saving ? 'Saving...' : 'Update Product'}
           </button>
           <button
             type="button"

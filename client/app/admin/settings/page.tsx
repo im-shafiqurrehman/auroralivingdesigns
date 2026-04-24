@@ -1,62 +1,116 @@
 'use client';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
+import { useAuthStore } from '@/lib/auth';
 
 export default function AdminSettings() {
-  const [form, setForm] = useState({
-    siteName: 'Aurora Living Designs',
-    domain: 'auroralivingdesigns.online',
-    whatsapp: '+92 300 123 4567',
-    email: 'info@auroralivingdesigns.online',
-    address: 'Lahore, Punjab, Pakistan',
-    hours: 'Monday – Saturday: 9:00 AM – 6:00 PM',
-  });
-
-  const handleSave = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.success('Settings saved (placeholder — connect to API as needed).');
-  };
-
-  const field = (key: keyof typeof form, label: string, type = 'text') => (
-    <div>
-      <label className="form-label">{label}</label>
-      <input
-        type={type}
-        className="input-aurora"
-        value={form[key]}
-        onChange={(e) => setForm({ ...form, [key]: e.target.value })}
-      />
-    </div>
-  );
+  const { user } = useAuthStore();
 
   return (
     <div className="p-8 max-w-2xl">
-      <h1 className="font-playfair text-3xl font-normal mb-8">Settings</h1>
+      <div className="mb-10">
+        <h1 className="font-playfair text-3xl font-normal">Settings</h1>
+        <p className="text-aurora-muted text-sm mt-1">
+          Admin account and platform configuration.
+        </p>
+      </div>
 
-      <form onSubmit={handleSave} className="space-y-6">
-        <div className="bg-aurora-card border border-[rgba(240,192,64,0.18)] p-6 space-y-5">
-          <div className="text-[0.7rem] tracking-[0.2em] uppercase text-gold mb-2">Site Information</div>
-          {field('siteName', 'Site Name')}
-          {field('domain', 'Domain')}
+      {/* Admin Profile Card */}
+      <div className="bg-aurora-card border border-[rgba(240,192,64,0.18)] p-6 mb-6">
+        <div className="text-[0.7rem] tracking-[0.2em] uppercase text-gold mb-5">
+          Admin Profile
         </div>
-
-        <div className="bg-aurora-card border border-[rgba(240,192,64,0.18)] p-6 space-y-5">
-          <div className="text-[0.7rem] tracking-[0.2em] uppercase text-gold mb-2">Contact Details</div>
-          {field('email', 'Contact Email', 'email')}
-          {field('whatsapp', 'WhatsApp Number')}
-          {field('address', 'Address')}
-          {field('hours', 'Business Hours')}
+        <div className="space-y-4">
+          <div className="flex justify-between items-center py-3 border-b border-[rgba(240,192,64,0.08)]">
+            <div>
+              <div className="text-[0.68rem] tracking-[0.18em] uppercase text-aurora-muted mb-0.5">
+                Name
+              </div>
+              <div className="text-sm">{user?.name || '—'}</div>
+            </div>
+          </div>
+          <div className="flex justify-between items-center py-3 border-b border-[rgba(240,192,64,0.08)]">
+            <div>
+              <div className="text-[0.68rem] tracking-[0.18em] uppercase text-aurora-muted mb-0.5">
+                Email
+              </div>
+              <div className="text-sm">{user?.email || '—'}</div>
+            </div>
+          </div>
+          <div className="flex justify-between items-center py-3">
+            <div>
+              <div className="text-[0.68rem] tracking-[0.18em] uppercase text-aurora-muted mb-0.5">
+                Role
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm">{user?.role}</span>
+                <span className="text-[0.62rem] tracking-widest uppercase border border-gold text-gold px-2 py-0.5">
+                  Admin
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <div className="bg-aurora-card border border-[rgba(240,192,64,0.18)] p-6">
-          <div className="text-[0.7rem] tracking-[0.2em] uppercase text-gold mb-4">Security</div>
-          <p className="text-aurora-muted text-sm font-light">
-            Keep administrator credentials outside the frontend UI. Manage admin accounts from secure backend tooling or database admin workflows only.
-          </p>
+      {/* Store Info (placeholder) */}
+      <div className="bg-aurora-card border border-[rgba(240,192,64,0.18)] p-6 mb-6">
+        <div className="text-[0.7rem] tracking-[0.2em] uppercase text-gold mb-5">
+          Store Information
         </div>
+        <div className="space-y-5">
+          {[
+            ['Store Name', 'Aurora Living Designs'],
+            ['Contact Email', 'info@auroralivingdesigns.online'],
+            ['WhatsApp', '+92 300 123 4567'],
+            ['Location', 'Lahore, Punjab, Pakistan'],
+          ].map(([label, value]) => (
+            <div key={label}>
+              <div className="text-[0.68rem] tracking-[0.18em] uppercase text-aurora-muted mb-1">
+                {label}
+              </div>
+              <div className="text-sm text-aurora-muted border-b border-[rgba(240,192,64,0.1)] pb-2">
+                {value}
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className="text-[0.65rem] text-aurora-muted mt-6 leading-relaxed">
+          ⚙ Full settings management (password change, store config, email
+          templates) is coming in a future update.
+        </p>
+      </div>
 
-        <button type="submit" className="btn-primary">Save Settings</button>
-      </form>
+      {/* System Info */}
+      <div className="bg-aurora-card border border-[rgba(240,192,64,0.12)] p-6">
+        <div className="text-[0.7rem] tracking-[0.2em] uppercase text-aurora-muted mb-4">
+          System
+        </div>
+        <div className="grid grid-cols-2 gap-4 text-xs text-aurora-muted">
+          <div>
+            <span className="text-[0.62rem] uppercase tracking-widest block mb-0.5">
+              Framework
+            </span>
+            Next.js 14 (App Router)
+          </div>
+          <div>
+            <span className="text-[0.62rem] uppercase tracking-widest block mb-0.5">
+              Backend
+            </span>
+            Express + MongoDB
+          </div>
+          <div>
+            <span className="text-[0.62rem] uppercase tracking-widest block mb-0.5">
+              Image Storage
+            </span>
+            Cloudinary
+          </div>
+          <div>
+            <span className="text-[0.62rem] uppercase tracking-widest block mb-0.5">
+              Auth
+            </span>
+            JWT (7-day expiry)
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

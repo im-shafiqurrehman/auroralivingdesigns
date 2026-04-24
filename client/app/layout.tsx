@@ -3,6 +3,7 @@ import { Playfair_Display, Cormorant_Garamond } from 'next/font/google';
 import './globals.css';
 import { Toaster } from 'react-hot-toast';
 import Navbar from '@/components/layout/Navbar';
+import AuthProvider from '@/components/providers/AuthProvider';
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -28,18 +29,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${playfair.variable} ${cormorant.variable}`}>
       <body className="bg-aurora-black text-aurora-text font-cormorant antialiased">
-        <Toaster
-          position="top-right"
-          toastOptions={{
-            style: {
-              background: '#111111',
-              color: '#f5f5f0',
-              border: '1px solid rgba(240,192,64,0.3)',
-            },
-          }}
-        />
-        <Navbar />
-        <main>{children}</main>
+        <AuthProvider>
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              duration: 4000,
+              style: {
+                background: '#111111',
+                color: '#f5f5f0',
+                border: '1px solid rgba(240,192,64,0.3)',
+                fontFamily: 'Cormorant Garamond, serif',
+                fontSize: '0.9rem',
+              },
+            }}
+          />
+          <Navbar />
+          <main>{children}</main>
+        </AuthProvider>
       </body>
     </html>
   );
