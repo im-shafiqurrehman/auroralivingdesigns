@@ -31,7 +31,6 @@ async function seed() {
   const adminPassword = await bcrypt.hash('Admin@123', 10);
   const userPassword = await bcrypt.hash('User@1234', 10);
 
-  // Use upsert so re-running without --fresh doesn't duplicate
   const admin = await User.findOneAndUpdate(
     { email: 'admin@concretecrafts.com' },
     {
@@ -58,10 +57,27 @@ async function seed() {
 
   // ─── Categories ───────────────────────────────────────────────────────────
   const categoryData = [
-    { name: 'Garden Fountains', slug: 'garden-fountains', description: 'Handcrafted concrete fountains for outdoor spaces.' },
-    { name: 'Ceiling Medallions', slug: 'ceiling-medallions', description: 'Ornate concrete medallions for interior ceilings.' },
-    { name: 'Sculptures', slug: 'sculptures', description: 'Decorative concrete sculptures and wall plaques.' },
-    { name: 'Custom Pieces', slug: 'custom-pieces', description: 'Bespoke concrete works made to your specifications.' },
+    {
+      name: 'Wood Antiques Restoration',
+      slug: 'wood-antiques-restoration',
+      description:
+        'Restoration, refurbishing, and custom crafting of wooden antiques. We preserve the original character of each piece while enhancing durability and beauty using high-quality materials and expert techniques. Services include antique furniture restoration, wood repair and refinishing, custom-made wooden pieces, and polishing, painting and detailing.',
+      image: '',
+    },
+    {
+      name: 'Gypsum Design & Interiors',
+      slug: 'gypsum-design-interiors',
+      description:
+        'Modern gypsum board features for both interior and exterior spaces. From elegant ceilings and TV walls to outdoor fire pits and water features. Services include gypsum board walls and ceilings, custom TV wall units, lighting-integrated designs, outdoor features such as fire pits, fountains and garden elements, and full design and execution services.',
+      image: '',
+    },
+    {
+      name: 'Custom Pieces',
+      slug: 'custom-pieces',
+      description:
+        'Bespoke works made to your exact specifications. Tell us your vision and we bring it to life.',
+      image: '',
+    },
   ];
 
   const categoryMap = {};
@@ -78,129 +94,136 @@ async function seed() {
 
   // ─── Products ─────────────────────────────────────────────────────────────
   const productData = [
+    // Wood Antiques Restoration
     {
-      name: '3-Tier Classical Garden Fountain',
-      slug: '3-tier-classical-garden-fountain',
-      category: categoryMap['garden-fountains'],
-      shortDescription: 'A grand three-tier garden fountain hand-cast in premium concrete.',
-      longDescription: 'Standing at 150cm, this fountain features three graduated tiers with ornamental column details. Each tier is hand-cast separately and assembled on-site. Includes submersible pump fitting.',
+      name: 'Antique Dining Table Restoration',
+      slug: 'antique-dining-table-restoration',
+      category: categoryMap['wood-antiques-restoration'],
+      shortDescription:
+        'Full restoration of antique dining tables — stripped, repaired, refinished, and sealed to original character.',
+      longDescription:
+        'We assess the structural integrity first, repair any joints or broken elements, then strip back old finishes to bare wood. The surface is sanded through multiple grits, stained to match the original tone, and sealed with a durable topcoat. Result: a piece that looks and feels as it did when first crafted.',
+      price: 15000,
+      dimensions: 'Varies by piece',
+      weight: '',
+      material: 'Solid hardwood, period-appropriate finishes',
+      images: [PLACEHOLDER('Dining Table Restoration')],
+      inStock: true,
+      featured: true,
+    },
+    {
+      name: 'Custom Handcrafted Wooden Cabinet',
+      slug: 'custom-handcrafted-wooden-cabinet',
+      category: categoryMap['wood-antiques-restoration'],
+      shortDescription:
+        'Bespoke wooden cabinets crafted to your dimensions, style, and finish preferences.',
+      longDescription:
+        'Designed from scratch or modelled after a period style you love. We use solid timber throughout — no veneered chipboard. Each cabinet is jointed, assembled, and finished by hand in our workshop.',
+      price: 35000,
+      dimensions: 'Custom',
+      weight: '',
+      material: 'Solid sheesham, walnut, or oak on request',
+      images: [PLACEHOLDER('Custom Wooden Cabinet')],
+      inStock: true,
+      featured: true,
+    },
+    {
+      name: 'Wood Polishing & Detailing Service',
+      slug: 'wood-polishing-detailing',
+      category: categoryMap['wood-antiques-restoration'],
+      shortDescription:
+        'Professional polishing, painting, and detailing for wooden furniture of any age.',
+      longDescription:
+        'Breathes new life into tired pieces without a full restoration. We clean, sand lightly, and apply French polish, lacquer, or wax depending on the wood type and desired finish. Ideal for heirloom pieces that just need refreshing.',
+      price: 5000,
+      dimensions: 'Varies',
+      weight: '',
+      material: 'French polish, wax, lacquer finishes',
+      images: [PLACEHOLDER('Wood Polishing')],
+      inStock: true,
+      featured: false,
+    },
+
+    // Gypsum Design & Interiors
+    {
+      name: 'Custom Gypsum TV Wall Unit',
+      slug: 'custom-gypsum-tv-wall-unit',
+      category: categoryMap['gypsum-design-interiors'],
+      shortDescription:
+        'Fully custom TV wall designs in gypsum board — from concept sketch to finished installation.',
+      longDescription:
+        'We design and execute TV wall units that integrate shelving, lighting, and decorative recesses into a single cohesive feature wall. Lighting channels are built in for LED strip placement. Finished smooth or with texture on request.',
       price: 45000,
-      dimensions: '90cm diameter × 150cm height',
-      weight: '85 kg',
-      material: 'Reinforced concrete composite',
-      images: [PLACEHOLDER('3-Tier Fountain')],
+      dimensions: 'Custom to room',
+      weight: '',
+      material: 'Gypsum board, metal framing, LED-ready channels',
+      images: [PLACEHOLDER('Gypsum TV Wall')],
       inStock: true,
       featured: true,
     },
     {
-      name: 'Victorian Acanthus Ceiling Medallion 36"',
-      slug: 'victorian-acanthus-ceiling-medallion-36',
-      category: categoryMap['ceiling-medallions'],
-      shortDescription: 'A 36-inch hand-sculpted ceiling medallion with acanthus leaf detailing.',
-      longDescription: 'Inspired by Victorian neoclassical architecture, this medallion features deeply carved acanthus leaf motifs and a central chandelier boss.',
-      price: 12500,
-      dimensions: '91cm diameter × 4cm depth',
-      weight: '18 kg',
-      material: 'White cement composite',
-      images: [PLACEHOLDER('Victorian Medallion 36in')],
+      name: 'Gypsum Ceiling Design & Installation',
+      slug: 'gypsum-ceiling-design-installation',
+      category: categoryMap['gypsum-design-interiors'],
+      shortDescription:
+        'Drop ceilings, coffered designs, and lighting-integrated gypsum ceilings for any room size.',
+      longDescription:
+        'We handle the full ceiling project from structural framing to final coat. Designs include simple drop ceilings, multi-level coffered panels, circular centrepieces, and perimeter cove lighting. We work with your interior designer or provide in-house design guidance.',
+      price: 30000,
+      dimensions: 'Per square foot, custom',
+      weight: '',
+      material: 'Gypsum board, steel framing',
+      images: [PLACEHOLDER('Gypsum Ceiling')],
       inStock: true,
       featured: true,
     },
     {
-      name: 'Angel Birdbath with Pedestal',
-      slug: 'angel-birdbath-with-pedestal',
-      category: categoryMap['garden-fountains'],
-      shortDescription: 'A graceful angel-motif birdbath mounted on a classical pedestal.',
-      longDescription: 'A serene garden centerpiece. The basin is supported by a sculpted angel figure atop a fluted pedestal. Cast in weather-resistant concrete, suitable for all climates.',
-      price: 18000,
-      dimensions: '50cm diameter × 90cm height',
-      weight: '32 kg',
-      material: 'Weather-resistant concrete',
-      images: [PLACEHOLDER('Angel Birdbath')],
-      inStock: true,
-      featured: true,
-    },
-    {
-      name: 'Lion Head Wall Plaque',
-      slug: 'lion-head-wall-plaque',
-      category: categoryMap['sculptures'],
-      shortDescription: 'A bold lion head wall plaque with commanding detail.',
-      longDescription: 'Cast from an original hand-sculpted master mold, this lion head plaque brings classical drama to exterior and interior walls.',
-      price: 12000,
-      dimensions: '45cm × 45cm × 15cm',
-      weight: '12 kg',
-      material: 'Cast concrete, sealed',
-      images: [PLACEHOLDER('Lion Head Plaque')],
+      name: 'Outdoor Fire Pit Feature',
+      slug: 'outdoor-fire-pit-feature',
+      category: categoryMap['gypsum-design-interiors'],
+      shortDescription:
+        'Bespoke outdoor fire pit and seating structures — designed and built for your garden or terrace.',
+      longDescription:
+        'We design custom fire pit enclosures using weather-resistant materials, integrated with seating walls, planters, or water features as required. Suitable for rooftop terraces, garden courtyards, and landscaped areas.',
+      price: 60000,
+      dimensions: 'Custom',
+      weight: '',
+      material: 'Weather-resistant concrete, outdoor-grade finishes',
+      images: [PLACEHOLDER('Outdoor Fire Pit')],
       inStock: true,
       featured: false,
     },
     {
-      name: 'Acanthus Leaf Medallion 24"',
-      slug: 'acanthus-leaf-medallion-24',
-      category: categoryMap['ceiling-medallions'],
-      shortDescription: 'A 24-inch medallion with flowing acanthus leaf pattern.',
-      longDescription: 'A refined, mid-size ceiling medallion suitable for rooms with standard ceiling heights.',
-      price: 6500,
-      dimensions: '61cm diameter × 3cm depth',
-      weight: '10 kg',
-      material: 'White cement composite',
-      images: [PLACEHOLDER('Acanthus Medallion 24in')],
+      name: 'Garden Water Feature',
+      slug: 'garden-water-feature',
+      category: categoryMap['gypsum-design-interiors'],
+      shortDescription:
+        'Custom garden fountains, wall water features, and pond designs for exterior spaces.',
+      longDescription:
+        'From simple wall-mounted water cascades to full pond and fountain installations, we design and execute water features that become the centrepiece of any garden. Submersible pump systems included. Waterproofing guaranteed.',
+      price: 40000,
+      dimensions: 'Custom',
+      weight: '',
+      material: 'Reinforced concrete, waterproof render',
+      images: [PLACEHOLDER('Garden Water Feature')],
       inStock: true,
       featured: false,
     },
+
+    // Custom Pieces
     {
-      name: 'Baroque Rosette Ceiling Medallion 30"',
-      slug: 'baroque-rosette-ceiling-medallion-30',
-      category: categoryMap['ceiling-medallions'],
-      shortDescription: 'A dramatic 30-inch baroque medallion with rosette center.',
-      longDescription: 'This medallion takes inspiration from European baroque interiors. The rosette center is surrounded by scrolling foliage and geometric banding.',
-      price: 8500,
-      dimensions: '76cm diameter × 4cm depth',
-      weight: '14 kg',
-      material: 'White cement composite',
-      images: [PLACEHOLDER('Baroque Rosette 30in')],
-      inStock: true,
-      featured: true,
-    },
-    {
-      name: 'Neptune Wall Fountain',
-      slug: 'neptune-wall-fountain',
-      category: categoryMap['garden-fountains'],
-      shortDescription: 'A wall-mounted fountain with Neptune mask spout.',
-      longDescription: 'Designed for courtyard and verandah walls. Features a classical mask spout and a deep basin. Includes back fitting for water pipe connection.',
-      price: 22000,
-      dimensions: '60cm wide × 80cm tall × 20cm depth',
-      weight: '28 kg',
-      material: 'Cast concrete, waterproofed',
-      images: [PLACEHOLDER('Neptune Wall Fountain')],
-      inStock: true,
-      featured: false,
-    },
-    {
-      name: 'Classical Pedestal Urn Fountain',
-      slug: 'classical-pedestal-urn-fountain',
-      category: categoryMap['garden-fountains'],
-      shortDescription: 'An overflowing urn fountain on a classical pedestal base.',
-      longDescription: 'Water cascades gently over the rim of a Greco-Roman style urn, recirculating into a hidden reservoir at the base.',
-      price: 32000,
-      dimensions: '55cm diameter × 120cm height',
-      weight: '55 kg',
-      material: 'Reinforced concrete, sealed',
-      images: [PLACEHOLDER('Pedestal Urn Fountain')],
-      inStock: true,
-      featured: false,
-    },
-    {
-      name: 'Ornate Oval Wall Planter',
-      slug: 'ornate-oval-wall-planter',
-      category: categoryMap['sculptures'],
-      shortDescription: 'A decorative oval wall planter with shell and scroll motifs.',
-      longDescription: 'Adds classical elegance to any exterior wall. The planter bowl is deep enough for trailing plants and features relief-carved shell and scroll ornaments.',
-      price: 8200,
-      dimensions: '50cm wide × 35cm tall × 20cm depth',
-      weight: '9 kg',
-      material: 'Cast concrete, sealed',
-      images: [PLACEHOLDER('Oval Wall Planter')],
+      name: 'Bespoke Custom Commission',
+      slug: 'bespoke-custom-commission',
+      category: categoryMap['custom-pieces'],
+      shortDescription:
+        'Have something specific in mind? We quote and build fully custom pieces to your brief.',
+      longDescription:
+        'Send us your idea — a sketch, a photo, a description. We consult on materials and feasibility, provide a detailed quote, and execute the work in our workshop. No minimum size. No limitation on complexity.',
+      price: 0,
+      dimensions: 'Custom',
+      weight: '',
+      material: 'Varies',
+      images: [PLACEHOLDER('Custom Commission')],
       inStock: true,
       featured: false,
     },
@@ -222,21 +245,21 @@ async function seed() {
       name: 'Zara Mahmood',
       email: 'zara@example.com',
       phone: '+92 321 111 0000',
-      message: 'Interested in the Victorian Medallion for my drawing room. Can you advise on installation?',
+      message: 'Interested in a gypsum TV wall for my drawing room. Can you provide a quote?',
       status: 'new',
     },
     {
       name: 'Bilal Chaudhry',
       email: 'bilal@example.com',
       phone: '+92 300 222 0000',
-      message: 'We need a custom fountain for a corporate lobby. Dimensions: 2m × 2m. Please contact.',
+      message: 'We need a custom ceiling design for a corporate office. Full floor. Please contact.',
       status: 'replied',
     },
     {
       name: 'Nadia Khawaja',
       email: 'nadia@example.com',
       phone: '+92 333 333 0000',
-      message: 'I am an interior designer based in Karachi. Looking to place bulk orders for a hotel project.',
+      message: 'Interior designer based in Lahore. Looking to discuss a hotel lobby wood restoration project.',
       status: 'new',
     },
   ];

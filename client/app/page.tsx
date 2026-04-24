@@ -20,10 +20,30 @@ async function getFeaturedProducts() {
 }
 
 const categories = [
-  { name: 'Garden Fountains', slug: 'garden-fountains', icon: '⛲', count: 4 },
-  { name: 'Ceiling Medallions', slug: 'ceiling-medallions', icon: '✦', count: 3 },
-  { name: 'Sculptures', slug: 'sculptures', icon: '🦁', count: 2 },
-  { name: 'Custom Pieces', slug: 'custom-pieces', icon: '◈', count: 0 },
+  {
+    name: 'Wood Antiques Restoration',
+    slug: 'wood-antiques-restoration',
+    icon: '🪵',
+    label: 'Restoration & Crafting',
+  },
+  {
+    name: 'Gypsum Design & Interiors',
+    slug: 'gypsum-design-interiors',
+    icon: '◈',
+    label: 'Interior & Exterior',
+  },
+  {
+    name: 'Custom TV Walls',
+    slug: 'gypsum-design-interiors',
+    icon: '▣',
+    label: 'Feature Walls',
+  },
+  {
+    name: 'Custom Pieces',
+    slug: 'custom-pieces',
+    icon: '✦',
+    label: 'Bespoke',
+  },
 ];
 
 export default async function HomePage() {
@@ -38,7 +58,7 @@ export default async function HomePage() {
         <div className="grid grid-cols-2 md:grid-cols-4">
           {categories.map((cat, i) => (
             <Link
-              key={cat.slug}
+              key={cat.name}
               href={`/products?category=${cat.slug}`}
               className={`p-8 flex flex-col gap-2 hover:bg-[rgba(240,192,64,0.04)] transition-colors duration-300 ${
                 i < categories.length - 1 ? 'border-r border-[rgba(240,192,64,0.15)]' : ''
@@ -46,9 +66,7 @@ export default async function HomePage() {
             >
               <span className="text-3xl mb-1">{cat.icon}</span>
               <span className="font-playfair text-sm">{cat.name}</span>
-              <span className="text-[0.7rem] tracking-[0.15em] text-gold">
-                {cat.count > 0 ? `${cat.count} Products` : 'Bespoke'}
-              </span>
+              <span className="text-[0.7rem] tracking-[0.15em] text-gold">{cat.label}</span>
             </Link>
           ))}
         </div>
@@ -60,10 +78,10 @@ export default async function HomePage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-4 gap-4">
             <div>
               <div className="section-label">Featured Works</div>
-              <h2 className="font-playfair text-3xl md:text-4xl font-normal">Signature Collection</h2>
+              <h2 className="font-playfair text-3xl md:text-4xl font-normal">Signature Services</h2>
             </div>
             <Link href="/products" className="btn-ghost self-start md:self-auto">
-              View All Products
+              View All Services
             </Link>
           </div>
           <div className="gold-divider mb-10" />
@@ -76,9 +94,9 @@ export default async function HomePage() {
           ) : (
             <div className="grid md:grid-cols-3 gap-px bg-[rgba(240,192,64,0.12)]">
               {[
-                { name: 'Victorian Acanthus Medallion 36"', category: 'Ceiling Medallions', price: 12500 },
-                { name: '3-Tier Classical Garden Fountain', category: 'Garden Fountains', price: 45000 },
-                { name: 'Angel Birdbath with Pedestal', category: 'Garden Fountains', price: 18000 },
+                { name: 'Antique Dining Table Restoration', category: 'Wood Antiques Restoration', price: 15000 },
+                { name: 'Custom Gypsum TV Wall Unit', category: 'Gypsum Design & Interiors', price: 45000 },
+                { name: 'Gypsum Ceiling Design & Installation', category: 'Gypsum Design & Interiors', price: 30000 },
               ].map((p) => (
                 <div key={p.name} className="bg-aurora-card p-5">
                   <div className="aspect-[4/3] bg-[#161616] border border-[rgba(240,192,64,0.1)] mb-4 flex items-center justify-center">
@@ -100,28 +118,28 @@ export default async function HomePage() {
           <div className="relative">
             <div className="absolute -top-4 -left-4 right-4 bottom-4 border border-[rgba(240,192,64,0.2)] z-0" />
             <img
-              src="https://placehold.co/600x500/0d0d0d/f0c040?text=Our+Workshop"
-              alt="Concrete crafts workshop"
+              src="/workshop.jpg"
+              alt="Workshop"
               className="relative z-10 w-full h-96 object-cover brightness-90 contrast-110"
             />
           </div>
           <div>
             <div className="section-label">Our Story</div>
             <h2 className="font-playfair text-3xl md:text-4xl font-normal mb-4">
-              Where Tradition Meets Stone
+              35+ Years of Craft & Precision
             </h2>
             <div className="w-16 gold-divider mb-6" />
             <p className="text-aurora-muted leading-[1.9] text-base font-light mb-4">
-              Aurora Living Designs was born from a deep respect for classical craftsmanship. Every medallion, fountain, and sculpture is cast and finished by hand in our London, Ontario workshop.
+              Aurora Living Designs brings over 35 years of hands-on expertise to every project. From restoring irreplaceable wooden antiques to designing statement gypsum feature walls, every detail is handled personally by our team.
             </p>
             <p className="text-aurora-muted leading-[1.9] text-base font-light mb-8">
-              We work with architects, interior designers, and homeowners who understand that some things cannot be mass-produced.
+              We work with homeowners, interior designers, and developers who value craftsmanship over shortcuts. No subcontracting. No compromises.
             </p>
             <div className="space-y-5">
               {[
-                ['01', 'Hand Molding', 'Each form sculpted by artisans using traditional techniques.'],
-                ['02', 'Precision Casting', 'Premium concrete mix poured into custom molds and cured.'],
-                ['03', 'Hand Finishing', 'Each surface hand-sanded and sealed for a refined result.'],
+                ['01', 'Wood Antiques Restoration', 'Preserving original character while improving durability. Antique furniture, custom woodwork, refinishing, and detailing.'],
+                ['02', 'Gypsum Design & Interiors', 'Concept to completion for gypsum ceilings, TV walls, and lighting-integrated designs for interior and exterior spaces.'],
+                ['03', 'Outdoor Features', 'Fire pits, water features, garden elements, and bespoke exterior structures built to last.'],
               ].map(([num, title, desc]) => (
                 <div key={title} className="flex gap-5 items-start">
                   <span className="font-playfair text-2xl text-[rgba(240,192,64,0.2)] leading-none min-w-[40px]">{num}</span>
