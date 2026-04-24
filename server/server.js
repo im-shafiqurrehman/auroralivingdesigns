@@ -62,6 +62,8 @@ const configuredClientOrigins = (process.env.CLIENT_URL || '')
 const defaultAllowedOrigins = [
   'https://auroralivingdesigns.vercel.app',
   'https://auroralivingdesigns-cvj6.vercel.app',
+  'https://auroralivingdesigns.online',
+  'https://www.auroralivingdesigns.online',
 ];
 
 const allowedOrigins = new Set([
