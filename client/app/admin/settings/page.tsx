@@ -61,7 +61,8 @@ export default function AdminSettings() {
             ['Store Name', 'Aurora Living Designs'],
             ['Contact Email', 'info@auroralivingdesigns.online'],
             ['WhatsApp', '+92 300 123 4567'],
-            ['Location', 'Lahore, Punjab, Pakistan'],
+            ['Location', '280 Hamilton Rd, London, Canada'],
+            ['Map', 'https://www.google.com/maps?q=280+Hamilton+Rd,+London,+Canada'],
           ].map(([label, value]) => (
             <div key={label}>
               <div className="text-[0.68rem] tracking-[0.18em] uppercase text-aurora-muted mb-1">

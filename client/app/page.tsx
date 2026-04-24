@@ -112,7 +112,7 @@ export default async function HomePage() {
             </h2>
             <div className="w-16 gold-divider mb-6" />
             <p className="text-aurora-muted leading-[1.9] text-base font-light mb-4">
-              Aurora Living Designs was born from a deep respect for classical craftsmanship. Every medallion, fountain, and sculpture is cast and finished by hand in our Lahore workshop.
+              Aurora Living Designs was born from a deep respect for classical craftsmanship. Every medallion, fountain, and sculpture is cast and finished by hand in our London, Ontario workshop.
             </p>
             <p className="text-aurora-muted leading-[1.9] text-base font-light mb-8">
               We work with architects, interior designers, and homeowners who understand that some things cannot be mass-produced.

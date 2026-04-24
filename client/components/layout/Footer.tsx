@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Footer() {
@@ -6,11 +7,22 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 pb-12 border-b border-[rgba(240,192,64,0.15)]">
           <div className="md:col-span-1">
-            <div className="font-playfair text-gold tracking-[0.15em] uppercase mb-4 text-lg">
-              Aurora Living Designs
+            <div className="flex items-center gap-3 mb-4">
+              <div className="h-12 w-12 md:h-14 md:w-14 rounded-full border border-[rgba(240,192,64,0.3)] overflow-hidden shrink-0">
+                <Image
+                  src="/logo.jpeg"
+                  alt="Aurora Living Designs logo"
+                  width={112}
+                  height={112}
+                  className="h-full w-full object-cover object-center scale-[1.5]"
+                />
+              </div>
+              <div className="font-playfair text-gold tracking-[0.15em] uppercase text-lg">
+                Aurora Living Designs
+              </div>
             </div>
             <p className="text-aurora-muted text-sm leading-relaxed font-light mb-4">
-              Handcrafted concrete medallions, fountains, and sculptures for spaces that demand permanence. Based in Lahore, Pakistan.
+              Handcrafted concrete medallions, fountains, and sculptures for spaces that demand permanence. Based in London, Ontario, Canada.
             </p>
             <div className="text-gold text-xs tracking-widest">auroralivingdesigns.online</div>
           </div>
@@ -38,7 +50,7 @@ export default function Footer() {
               links: [
                 { href: 'mailto:info@auroralivingdesigns.online', label: 'info@auroralivingdesigns.online' },
                 { href: 'https://wa.me/923001234567', label: '+92 300 123 4567 (WhatsApp)' },
-                { href: '#', label: 'Lahore, Punjab, Pakistan' },
+                { href: 'https://www.google.com/maps?q=280+Hamilton+Rd,+London,+Canada', label: '280 Hamilton Rd, London, Canada' },
               ],
             },
           ].map((col) => (

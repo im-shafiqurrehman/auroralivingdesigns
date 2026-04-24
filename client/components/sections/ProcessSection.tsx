@@ -15,7 +15,7 @@ const steps = [
   {
     number: '03',
     title: 'Finishing & Delivery',
-    description: 'Hand-smoothed, sealed, and dispatched with care across Pakistan.',
+    description: 'Hand-smoothed, sealed, and dispatched with care across Ontario and beyond.',
   },
 ];
 

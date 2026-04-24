@@ -1,6 +1,5 @@
 'use client';
 import { useState } from 'react';
-import { Metadata } from 'next';
 import Footer from '@/components/layout/Footer';
 import api from '@/lib/api';
 import toast from 'react-hot-toast';
@@ -38,7 +37,8 @@ export default function ContactPage() {
                 We work directly with clients to deliver pieces that fit their space perfectly. Tell us what you have in mind — we respond within one business day.
               </p>
               {[
-                ['📍', 'Location', 'Lahore, Punjab, Pakistan'],
+                ['📍', 'Location', '280 Hamilton Rd, London, Canada'],
+                ['🗺️', 'Map', '280 Hamilton Rd, London, Canada'],
                 ['✉', 'Email', 'info@auroralivingdesigns.online'],
                 ['💬', 'WhatsApp', '+92 300 123 4567'],
                 ['🌐', 'Website', 'auroralivingdesigns.online'],
@@ -51,6 +51,19 @@ export default function ContactPage() {
                   </div>
                 </div>
               ))}
+
+              <div className="mt-8 border border-[rgba(240,192,64,0.2)] bg-aurora-card overflow-hidden">
+                <iframe
+                  title="Aurora Living Designs Map"
+                  src="https://www.google.com/maps?q=280+Hamilton+Rd,+London,+Canada&output=embed"
+                  width="100%"
+                  height="280"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+
               <div className="mt-8 p-5 bg-aurora-card border border-[rgba(240,192,64,0.18)]">
                 <div className="text-[0.7rem] tracking-[0.2em] uppercase text-gold mb-2">Business Hours</div>
                 <p className="text-aurora-muted text-sm leading-relaxed font-light">

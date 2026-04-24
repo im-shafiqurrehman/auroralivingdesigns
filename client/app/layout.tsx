@@ -21,8 +21,13 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   title: 'Aurora Living Designs — Handcrafted Concrete Works',
   description:
-    'Premium handcrafted concrete ceiling medallions, garden fountains, and decorative sculptures. Based in Lahore, Pakistan.',
-  keywords: 'concrete medallions, garden fountains, concrete sculptures, Lahore, handcrafted',
+    'Premium handcrafted concrete ceiling medallions, garden fountains, and decorative sculptures. Based in London, Ontario, Canada.',
+  keywords: 'concrete medallions, garden fountains, concrete sculptures, London Ontario, handcrafted',
+  icons: {
+    icon: '/favicon.png',
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

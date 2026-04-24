@@ -23,7 +23,7 @@ export default function Hero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.9, ease: 'easeOut' }}
         >
-          <div className="section-label mb-6">Lahore, Pakistan · Est. 2018</div>
+          <div className="section-label mb-6">London, Ontario · Est. 2018</div>
           <h1 className="font-playfair text-5xl md:text-6xl leading-[1.08] font-normal mb-6">
             Crafted in<br />
             <em className="text-gold not-italic">Concrete.</em><br />

@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
@@ -36,8 +37,20 @@ export default function Navbar() {
         scrolled ? 'bg-[rgba(13,13,13,0.97)] backdrop-blur-md' : 'bg-transparent'
       }`}
     >
-      <Link href="/" className="font-playfair text-lg text-gold tracking-[0.15em] uppercase">
-        Aurora <span className="text-aurora-text font-light">Living Designs</span>
+      <Link href="/" className="flex items-center gap-3">
+        <div className="h-12 w-12 md:h-14 md:w-14 rounded-full border border-[rgba(240,192,64,0.3)] overflow-hidden shrink-0">
+          <Image
+            src="/logo.jpeg"
+            alt="Aurora Living Designs logo"
+            width={112}
+            height={112}
+            className="h-full w-full object-cover object-center scale-[1.5]"
+            priority
+          />
+        </div>
+        <span className="font-playfair text-lg text-gold tracking-[0.15em] uppercase">
+          Aurora <span className="text-aurora-text font-light">Living Designs</span>
+        </span>
       </Link>
 
       {/* Desktop links */}

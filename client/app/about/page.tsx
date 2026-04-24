@@ -17,13 +17,13 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-2 gap-16 mb-20">
             <div className="space-y-5">
               <p className="text-aurora-muted text-base leading-[1.9] font-light">
-                Aurora Living Designs was founded in Lahore in 2018 by a family of craftsmen who had spent generations working with stone and plaster. When they turned to concrete, they discovered a material that could carry the same detail and weight as stone — at a fraction of the cost, and with twice the durability.
+                Aurora Living Designs was founded in 2018 by a family of craftsmen who had spent generations working with stone and plaster. When they turned to concrete, they discovered a material that could carry the same detail and weight as stone at a fraction of the cost, and with twice the durability.
               </p>
               <p className="text-aurora-muted text-base leading-[1.9] font-light">
-                Today, we supply architects, developers, interior designers, and private homeowners across Pakistan. Our pieces appear in hotels, corporate lobbies, private residences, and gardens from Karachi to Islamabad.
+                Today, we supply architects, developers, interior designers, and private homeowners across Ontario and surrounding regions in Canada. Our pieces appear in hotels, corporate lobbies, private residences, and gardens across the Greater Toronto Area and Southwestern Ontario.
               </p>
               <p className="text-aurora-muted text-base leading-[1.9] font-light">
-                Everything we make is hand-cast in our Lahore workshop. No two pieces are identical. That is the point.
+                Everything we make is hand-cast in our London workshop. No two pieces are identical. That is the point.
               </p>
             </div>
             <div>
@@ -58,7 +58,7 @@ export default function AboutPage() {
 
           {/* Workshop photos */}
           <div className="section-label">Workshop</div>
-          <h2 className="font-playfair text-3xl font-normal mb-4">Our Lahore Studio</h2>
+          <h2 className="font-playfair text-3xl font-normal mb-4">Our London Studio</h2>
           <div className="gold-divider mb-8" />
           <div className="grid md:grid-cols-3 gap-3">
             {['Mold Room', 'Casting Floor', 'Finishing Station'].map((label) => (

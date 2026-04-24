@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const faqs = [
   {
-    q: 'Do you ship across Pakistan?',
-    a: 'Yes. We deliver to all major cities including Lahore, Karachi, Islamabad, Peshawar, and Faisalabad. Shipping costs depend on weight and distance — contact us for a quote.',
+    q: 'Do you ship across Canada?',
+    a: 'Yes. We deliver across Ontario and ship nationwide across Canada. Shipping costs depend on weight and distance; contact us for a quote.',
   },
   {
     q: 'Can I place a custom order?',
@@ -25,7 +25,7 @@ const faqs = [
   },
   {
     q: 'Do you install the fountain on-site?',
-    a: 'We offer installation services in Lahore only. For other cities, we provide a detailed installation guide with every order.',
+    a: 'We offer installation services in the London, Ontario area. For other regions, we provide a detailed installation guide with every order.',
   },
   {
     q: 'What materials do you use?',
