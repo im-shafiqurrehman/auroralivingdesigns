@@ -1,7 +1,14 @@
 'use client';
 import { motion } from 'framer-motion';
 
-const tiles = [1, 2, 3, 4, 5, 6];
+const tiles = [
+  { src: '/1.jpg', alt: 'Craft piece 1' },
+  { src: '/2.jpg', alt: 'Craft piece 2' },
+  { src: '/3.jpg', alt: 'Craft piece 3' },
+  { src: '/4.jpg', alt: 'Craft piece 4' },
+  { src: '/5.jpg', alt: 'Craft piece 5' },
+  { src: '/6.jpg', alt: 'Craft piece 6' },
+];
 
 export default function GalleryStrip() {
   return (
@@ -22,9 +29,9 @@ export default function GalleryStrip() {
         </motion.div>
 
         <div className="grid grid-cols-3 gap-2 md:gap-3">
-          {tiles.map((n, i) => (
+          {tiles.map((tile, i) => (
             <motion.div
-              key={n}
+              key={tile.src}
               initial={{ opacity: 0, scale: 0.97 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
@@ -32,8 +39,8 @@ export default function GalleryStrip() {
               className="relative overflow-hidden aspect-square group cursor-pointer"
             >
               <img
-                src={`https://placehold.co/400x400/111111/f0c040?text=Craft+%23${n}`}
-                alt={`Craft piece ${n}`}
+                src={tile.src}
+                alt={tile.alt}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
               />
               {/* Gold overlay on hover */}

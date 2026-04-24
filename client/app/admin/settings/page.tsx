@@ -60,9 +60,9 @@ export default function AdminSettings() {
           {[
             ['Store Name', 'Aurora Living Designs'],
             ['Contact Email', 'info@auroralivingdesigns.online'],
-            ['WhatsApp', '+92 300 123 4567'],
-            ['Location', '280 Hamilton Rd, London, Canada'],
-            ['Map', 'https://www.google.com/maps?q=280+Hamilton+Rd,+London,+Canada'],
+            ['WhatsApp', '+1 (226) 998-1419'],
+            ['Location', '280 Hamilton Rd, London, Ontario'],
+            ['Map', 'https://www.google.com/maps?q=280+Hamilton+Rd,+London,+Ontario'],
           ].map(([label, value]) => (
             <div key={label}>
               <div className="text-[0.68rem] tracking-[0.18em] uppercase text-aurora-muted mb-1">
@@ -80,38 +80,6 @@ export default function AdminSettings() {
         </p>
       </div>
 
-      {/* System Info */}
-      <div className="bg-aurora-card border border-[rgba(240,192,64,0.12)] p-6">
-        <div className="text-[0.7rem] tracking-[0.2em] uppercase text-aurora-muted mb-4">
-          System
-        </div>
-        <div className="grid grid-cols-2 gap-4 text-xs text-aurora-muted">
-          <div>
-            <span className="text-[0.62rem] uppercase tracking-widest block mb-0.5">
-              Framework
-            </span>
-            Next.js 14 (App Router)
-          </div>
-          <div>
-            <span className="text-[0.62rem] uppercase tracking-widest block mb-0.5">
-              Backend
-            </span>
-            Express + MongoDB
-          </div>
-          <div>
-            <span className="text-[0.62rem] uppercase tracking-widest block mb-0.5">
-              Image Storage
-            </span>
-            Cloudinary
-          </div>
-          <div>
-            <span className="text-[0.62rem] uppercase tracking-widest block mb-0.5">
-              Auth
-            </span>
-            JWT (7-day expiry)
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

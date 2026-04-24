@@ -56,20 +56,6 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Workshop photos */}
-          <div className="section-label">Workshop</div>
-          <h2 className="font-playfair text-3xl font-normal mb-4">Our London Studio</h2>
-          <div className="gold-divider mb-8" />
-          <div className="grid md:grid-cols-3 gap-3">
-            {['Mold Room', 'Casting Floor', 'Finishing Station'].map((label) => (
-              <img
-                key={label}
-                src={`https://placehold.co/600x400/161616/f0c040?text=${encodeURIComponent(label)}`}
-                alt={label}
-                className="w-full h-56 object-cover border border-[rgba(240,192,64,0.15)] brightness-75"
-              />
-            ))}
-          </div>
         </div>
       </section>
       <Footer />

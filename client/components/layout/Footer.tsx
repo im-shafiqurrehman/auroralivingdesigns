@@ -49,8 +49,8 @@ export default function Footer() {
               title: 'Contact',
               links: [
                 { href: 'mailto:info@auroralivingdesigns.online', label: 'info@auroralivingdesigns.online' },
-                { href: 'https://wa.me/923001234567', label: '+92 300 123 4567 (WhatsApp)' },
-                { href: 'https://www.google.com/maps?q=280+Hamilton+Rd,+London,+Canada', label: '280 Hamilton Rd, London, Canada' },
+                { href: 'https://wa.me/12269981419', label: '+1 (226) 998-1419 (WhatsApp)' },
+                { href: 'https://www.google.com/maps?q=280+Hamilton+Rd,+London,+Ontario', label: '280 Hamilton Rd, London, Ontario' },
               ],
             },
           ].map((col) => (

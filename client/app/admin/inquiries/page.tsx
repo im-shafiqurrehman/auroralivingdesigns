@@ -56,6 +56,21 @@ export default function AdminInquiries() {
     }
   };
 
+  const deleteInquiry = async (id: string) => {
+    const confirmed = window.confirm('Delete this inquiry? This cannot be undone.');
+    if (!confirmed) return;
+
+    try {
+      await api.delete(`/inquiries/${id}`);
+      toast.success('Inquiry deleted');
+      await fetchInquiries();
+      setSelected((prev) => (prev?._id === id ? null : prev));
+    } catch (error: any) {
+      const message = error?.response?.data?.message || 'Delete failed';
+      toast.error(message);
+    }
+  };
+
   return (
     <div className="p-8 relative">
       {/* Slide-over panel */}
@@ -112,6 +127,12 @@ export default function AdminInquiries() {
                       Mark Replied
                     </button>
                   )}
+                  <button
+                    onClick={() => deleteInquiry(selected._id)}
+                    className="border border-[rgba(239,68,68,0.25)] text-red-400 px-3 py-1 text-xs uppercase tracking-wider hover:border-red-400 hover:text-red-300 transition-all"
+                  >
+                    Delete
+                  </button>
                 </div>
 
                 {/* Sender details */}
@@ -246,6 +267,12 @@ export default function AdminInquiries() {
                           Replied
                         </button>
                       )}
+                      <button
+                        onClick={() => deleteInquiry(inq._id)}
+                        className="border border-[rgba(239,68,68,0.25)] text-red-400 px-2.5 py-1 text-xs uppercase tracking-wider hover:border-red-400 hover:text-red-300 transition-all whitespace-nowrap"
+                      >
+                        Delete
+                      </button>
                     </div>
                   </td>
                 </tr>

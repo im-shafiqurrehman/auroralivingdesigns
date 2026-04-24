@@ -19,6 +19,8 @@ exports.getInquiries = async (req, res) => {
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(Number(limit));
+
+  res.set('Cache-Control', 'no-store, max-age=0');
   res.json({ inquiries, total });
 };
 
@@ -28,4 +30,11 @@ exports.updateInquiry = async (req, res) => {
   if (req.body.status) inquiry.status = req.body.status;
   await inquiry.save();
   res.json(inquiry);
+};
+
+exports.deleteInquiry = async (req, res) => {
+  const { deletedCount } = await Inquiry.deleteOne({ _id: req.params.id });
+  if (!deletedCount) return res.status(404).json({ message: 'Inquiry not found' });
+
+  res.json({ message: 'Inquiry deleted' });
 };

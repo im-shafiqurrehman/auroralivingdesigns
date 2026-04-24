@@ -37,10 +37,10 @@ export default function ContactPage() {
                 We work directly with clients to deliver pieces that fit their space perfectly. Tell us what you have in mind — we respond within one business day.
               </p>
               {[
-                ['📍', 'Location', '280 Hamilton Rd, London, Canada'],
-                ['🗺️', 'Map', '280 Hamilton Rd, London, Canada'],
+                ['📍', 'Location', '280 Hamilton Rd, London, Ontario'],
+                ['🗺️', 'Map', '280 Hamilton Rd, London, Ontario'],
                 ['✉', 'Email', 'info@auroralivingdesigns.online'],
-                ['💬', 'WhatsApp', '+92 300 123 4567'],
+                ['💬', 'WhatsApp', '+1 (226) 998-1419'],
                 ['🌐', 'Website', 'auroralivingdesigns.online'],
               ].map(([icon, label, value]) => (
                 <div key={label} className="flex gap-4 mb-6">
@@ -55,7 +55,7 @@ export default function ContactPage() {
               <div className="mt-8 border border-[rgba(240,192,64,0.2)] bg-aurora-card overflow-hidden">
                 <iframe
                   title="Aurora Living Designs Map"
-                  src="https://www.google.com/maps?q=280+Hamilton+Rd,+London,+Canada&output=embed"
+                  src="https://www.google.com/maps?q=280+Hamilton+Rd,+London,+Ontario&output=embed"
                   width="100%"
                   height="280"
                   style={{ border: 0 }}
@@ -97,7 +97,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <label className="form-label">Phone / WhatsApp</label>
-                  <input className="input-aurora" placeholder="+92 300 000 0000"
+                  <input className="input-aurora" placeholder="+1 (226) 998-1419"
                     value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
                 </div>
                 <div>
