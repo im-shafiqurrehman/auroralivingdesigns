@@ -92,9 +92,9 @@ export default function EditProductPage() {
             name: data.name || '',
             slug: data.slug || '',
             category: data.category?._id || '',
-            shortDescription: data.shortDescription || '',
+              shortDescription: data.shortDescription || '',
             longDescription: data.longDescription || '',
-            price: String(data.price || ''),
+            price: data.price != null ? String(data.price) : '',
             dimensions: data.dimensions || '',
             weight: data.weight || '',
             material: data.material || '',
@@ -230,12 +230,12 @@ export default function EditProductPage() {
           </div>
 
           <div>
-            <label className={labelClass}>Price (Rs.) *</label>
+            <label className={labelClass}>Price ($)</label>
             <input
-              required
               type="number"
               min={0}
               className={inputClass}
+              placeholder="Optional"
               value={form.price}
               onChange={(e) => set('price', e.target.value)}
             />
@@ -243,7 +243,7 @@ export default function EditProductPage() {
 
           <div>
             <div className="flex items-end justify-between mb-2">
-              <label className={labelClass + ' mb-0'}>Short Description *</label>
+              <label className={labelClass + ' mb-0'}>Short Description</label>
               <span
                 className={`text-[0.62rem] tabular-nums ${
                   shortDescLen > 160 ? 'text-red-400' : 'text-aurora-muted'
@@ -253,8 +253,8 @@ export default function EditProductPage() {
               </span>
             </div>
             <input
-              required
               className={inputClass}
+              placeholder="Optional"
               value={form.shortDescription}
               onChange={(e) => set('shortDescription', e.target.value)}
               maxLength={180}

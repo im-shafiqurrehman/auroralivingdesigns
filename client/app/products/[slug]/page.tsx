@@ -11,8 +11,8 @@ interface Product {
   _id: string;
   name: string;
   slug: string;
-  price: number;
-  shortDescription: string;
+  price?: number;
+  shortDescription?: string;
   longDescription: string;
   images: string[];
   featured: boolean;
@@ -48,6 +48,13 @@ export default function ProductDetailPage() {
   const imgs = product.images?.length > 0
     ? product.images
     : [`https://placehold.co/800x800/111111/f0c040?text=${encodeURIComponent(product.name)}`];
+  const priceLabel = product.price != null
+    ? new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        maximumFractionDigits: 0,
+      }).format(product.price)
+    : 'Price on request';
 
   return (
     <>
@@ -64,11 +71,11 @@ export default function ProductDetailPage() {
         <div className="grid md:grid-cols-2 gap-16 mb-16">
           {/* Gallery */}
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-            <div className="relative aspect-square overflow-hidden border border-[rgba(240,192,64,0.2)] mb-3">
+            <div className="relative aspect-square border border-[rgba(240,192,64,0.2)] mb-3 bg-[#111111]">
               <img
                 src={imgs[activeImg]}
                 alt={product.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
             <div className="grid grid-cols-4 gap-2">
@@ -76,13 +83,13 @@ export default function ProductDetailPage() {
                 <button
                   key={i}
                   onClick={() => setActiveImg(i)}
-                  className={`aspect-square overflow-hidden border transition-all ${
+                  className={`aspect-square border bg-[#111111] transition-all ${
                     activeImg === i
                       ? 'border-gold opacity-100'
                       : 'border-[rgba(240,192,64,0.15)] opacity-60 hover:opacity-100'
                   }`}
                 >
-                  <img src={img} alt="" className="w-full h-full object-cover" />
+                  <img src={img} alt="" className="w-full h-full object-contain" />
                 </button>
               ))}
             </div>
@@ -94,8 +101,10 @@ export default function ProductDetailPage() {
               {product.category?.name}
             </div>
             <h1 className="font-playfair text-3xl md:text-4xl font-normal leading-snug mb-4">{product.name}</h1>
-            <div className="text-2xl text-gold font-light mb-6">Rs. {product.price.toLocaleString()}</div>
-            <p className="text-aurora-muted leading-[1.9] text-sm font-light mb-6">{product.shortDescription}</p>
+            <div className="text-2xl text-gold font-light mb-6">{priceLabel}</div>
+            {product.shortDescription ? (
+              <p className="text-aurora-muted leading-[1.9] text-sm font-light mb-6">{product.shortDescription}</p>
+            ) : null}
             {product.longDescription && (
               <p className="text-aurora-muted leading-[1.9] text-sm font-light mb-6">{product.longDescription}</p>
             )}
@@ -121,7 +130,7 @@ export default function ProductDetailPage() {
               onClick={() => setModalOpen(true)}
               className="btn-primary w-full mb-3"
             >
-              Inquire to Order
+              Get Quotation
             </button>
             <Link href="/contact" className="btn-ghost w-full block text-center">
               Contact Us

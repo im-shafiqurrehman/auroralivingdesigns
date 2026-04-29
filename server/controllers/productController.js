@@ -2,6 +2,12 @@ const Product = require('../models/Product');
 const Category = require('../models/Category');
 const slugify = require('slugify');
 
+function parseOptionalNumber(value) {
+  if (value === undefined || value === null || value === '') return undefined;
+  const parsed = Number(value);
+  return Number.isNaN(parsed) ? undefined : parsed;
+}
+
 // GET /api/products — paginated list with optional filters
 exports.getProducts = async (req, res) => {
   try {
@@ -94,7 +100,7 @@ exports.createProduct = async (req, res) => {
       category,
       shortDescription,
       longDescription: longDescription || '',
-      price: Number(price),
+      price: parseOptionalNumber(price),
       dimensions: dimensions || '',
       weight: weight || '',
       material: material || '',
@@ -122,7 +128,9 @@ exports.updateProduct = async (req, res) => {
       'price', 'dimensions', 'weight', 'material',
     ];
     scalarFields.forEach((f) => {
-      if (req.body[f] !== undefined) product[f] = req.body[f];
+      if (req.body[f] !== undefined) {
+        product[f] = f === 'price' ? parseOptionalNumber(req.body[f]) : req.body[f];
+      }
     });
 
     // Boolean fields — comes as string from FormData

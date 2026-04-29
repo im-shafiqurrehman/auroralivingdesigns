@@ -197,13 +197,12 @@ export default function NewProductPage() {
           </div>
 
           <div>
-            <label className={labelClass}>Price (Rs.) *</label>
+            <label className={labelClass}>Price ($)</label>
             <input
-              required
               type="number"
               min={0}
               className={inputClass}
-              placeholder="45000"
+              placeholder="Optional"
               value={form.price}
               onChange={(e) => set('price', e.target.value)}
             />
@@ -211,7 +210,7 @@ export default function NewProductPage() {
 
           <div>
             <div className="flex items-end justify-between mb-2">
-              <label className={labelClass + ' mb-0'}>Short Description *</label>
+              <label className={labelClass + ' mb-0'}>Short Description</label>
               <span
                 className={`text-[0.62rem] tabular-nums ${
                   shortDescLen > 160 ? 'text-red-400' : 'text-aurora-muted'
@@ -221,8 +220,8 @@ export default function NewProductPage() {
               </span>
             </div>
             <input
-              required
               className={inputClass}
+              placeholder="Optional"
               placeholder="A brief one-line description shown in product listings..."
               value={form.shortDescription}
               onChange={(e) => set('shortDescription', e.target.value)}

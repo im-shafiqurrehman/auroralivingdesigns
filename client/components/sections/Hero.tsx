@@ -56,29 +56,26 @@ export default function Hero() {
           transition={{ duration: 0.9, ease: 'easeOut', delay: 0.15 }}
           className="grid grid-cols-2 gap-3"
         >
-          <div className="col-span-2 relative overflow-hidden border border-[rgba(240,192,64,0.2)]">
+          <div className="col-span-2 relative border border-[rgba(240,192,64,0.2)] bg-[#111111]">
             <img
               src="https://placehold.co/700x360/111111/f0c040?text=Victorian+Ceiling+Medallion"
               alt="Ceiling medallion"
-              className="w-full h-64 object-cover brightness-90"
+              className="w-full h-64 object-contain"
             />
-            <div className="absolute inset-0 bg-gradient-to-tr from-[rgba(240,192,64,0.06)] to-transparent pointer-events-none" />
           </div>
-          <div className="relative overflow-hidden border border-[rgba(240,192,64,0.2)]">
+          <div className="relative border border-[rgba(240,192,64,0.2)] bg-[#111111]">
             <img
               src="https://placehold.co/340x200/161616/f0c040?text=Garden+Fountain"
               alt="Garden fountain"
-              className="w-full h-40 object-cover brightness-85"
+              className="w-full h-40 object-contain"
             />
-            <div className="absolute inset-0 bg-gradient-to-tr from-[rgba(240,192,64,0.06)] to-transparent pointer-events-none" />
           </div>
-          <div className="relative overflow-hidden border border-[rgba(240,192,64,0.2)]">
+          <div className="relative border border-[rgba(240,192,64,0.2)] bg-[#111111]">
             <img
               src="https://placehold.co/340x200/111111/b8942a?text=Lion+Plaque"
               alt="Lion sculpture"
-              className="w-full h-40 object-cover brightness-75"
+              className="w-full h-40 object-contain"
             />
-            <div className="absolute inset-0 bg-gradient-to-tr from-[rgba(240,192,64,0.06)] to-transparent pointer-events-none" />
           </div>
         </motion.div>
       </div>

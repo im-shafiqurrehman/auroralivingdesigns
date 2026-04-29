@@ -8,7 +8,7 @@ interface Product {
   _id: string;
   name: string;
   category?: { name: string };
-  price: number;
+  price?: number;
   inStock: boolean;
   featured: boolean;
   images: string[];
@@ -171,7 +171,15 @@ export default function AdminProducts() {
                     <span className="line-clamp-1 block">{p.name}</span>
                   </td>
                   <td className="text-aurora-muted">{p.category?.name || '—'}</td>
-                  <td className="whitespace-nowrap">Rs. {p.price?.toLocaleString()}</td>
+                  <td className="whitespace-nowrap">
+                    {p.price != null
+                      ? new Intl.NumberFormat('en-US', {
+                          style: 'currency',
+                          currency: 'USD',
+                          maximumFractionDigits: 0,
+                        }).format(p.price)
+                      : 'Price on request'}
+                  </td>
                   <td>
                     <span
                       className={`text-[0.62rem] tracking-widest uppercase border px-2 py-0.5 whitespace-nowrap ${

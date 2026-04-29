@@ -112,7 +112,15 @@ export default function AdminOverview() {
               <tr key={p._id}>
                 <td className="font-playfair">{p.name}</td>
                 <td className="text-aurora-muted">{p.category?.name || '—'}</td>
-                <td>Rs. {p.price?.toLocaleString()}</td>
+                <td>
+                  {p.price != null
+                    ? new Intl.NumberFormat('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                        maximumFractionDigits: 0,
+                      }).format(p.price)
+                    : 'Price on request'}
+                </td>
                 <td>
                   <span className={`text-[0.62rem] tracking-widest uppercase border px-2 py-0.5 ${p.inStock ? 'text-green-400 border-green-400' : 'text-red-400 border-red-400'}`}>
                     {p.inStock ? 'In Stock' : 'Out'}

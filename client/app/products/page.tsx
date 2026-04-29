@@ -24,7 +24,7 @@ interface ProductType {
   _id: string;
   name: string;
   slug: string;
-  price: number;
+  price?: number;
   shortDescription: string;
   images: string[];
   featured: boolean;

@@ -36,31 +36,13 @@ export default function GalleryStrip() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.07 }}
-              className="relative overflow-hidden aspect-square group cursor-pointer"
+              className="relative aspect-square bg-[#111111]"
             >
               <img
                 src={tile.src}
                 alt={tile.alt}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                className="w-full h-full object-contain"
               />
-              {/* Gold overlay on hover */}
-              <div className="absolute inset-0 bg-[rgba(240,192,64,0.15)] opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-center justify-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#f0c040"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="opacity-90"
-                >
-                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-                  <circle cx="12" cy="13" r="4" />
-                </svg>
-              </div>
             </motion.div>
           ))}
         </div>

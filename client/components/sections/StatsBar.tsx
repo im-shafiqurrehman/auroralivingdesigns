@@ -6,7 +6,7 @@ const stats = [
   { value: 500, suffix: '+', label: 'Projects Completed' },
   { value: 37,  suffix: '+', label: 'Years of Craftsmanship' },
   { value: 200, suffix: '+', label: 'Custom Designs' },
-  { value: 100, suffix: '%', label: 'Handmade in Canada' },
+  { value: 100, suffix: '%', label: 'Handmade in North America' },
 ];
 
 function CountUp({ target, suffix, active }: { target: number; suffix: string; active: boolean }) {

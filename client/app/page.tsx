@@ -23,25 +23,50 @@ const categories = [
   {
     name: 'Wood Antiques Restoration',
     slug: 'wood-antiques-restoration',
-    icon: '🪵',
+    icon: (
+      <svg className="w-full h-full" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="24" cy="24" r="18" stroke="currentColor" strokeWidth="1.5" opacity="0.5" />
+        <path d="M24 14c-4 0-7 3-7 7s3 7 7 7 7 3 7 7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        <path d="M19 19c1.4-1.4 3.2-2.2 5-2.2" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" opacity="0.8" />
+        <path d="M18 26c1.6-1 3.3-1.5 6-1.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" opacity="0.65" />
+      </svg>
+    ),
     label: 'Restoration & Crafting',
   },
   {
     name: 'Gypsum Design & Interiors',
     slug: 'gypsum-design-interiors',
-    icon: '◈',
+    icon: (
+      <svg className="w-full h-full" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="12" y="12" width="24" height="24" rx="3" stroke="currentColor" strokeWidth="1.5" opacity="0.5" />
+        <path d="M18 18h12M18 24h12M18 30h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        <path d="M15 35h18" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0.7" />
+      </svg>
+    ),
     label: 'Interior & Exterior',
   },
   {
     name: 'Custom TV Walls',
     slug: 'gypsum-design-interiors',
-    icon: '▣',
+    icon: (
+      <svg className="w-full h-full" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="10" y="14" width="28" height="20" rx="2.5" stroke="currentColor" strokeWidth="1.5" opacity="0.5" />
+        <path d="M17 18h14M19 30h10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        <path d="M18 34l-2 4M30 34l2 4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" opacity="0.7" />
+      </svg>
+    ),
     label: 'Feature Walls',
   },
   {
     name: 'Custom Pieces',
     slug: 'custom-pieces',
-    icon: '✦',
+    icon: (
+      <svg className="w-full h-full" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M24 10l3.3 7.1 7.7 1.2-5.5 5.7 1.3 8-6.8-3.7-6.8 3.7 1.3-8-5.5-5.7 7.7-1.2L24 10Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" opacity="0.55" />
+        <path d="M24 18.5v11" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        <path d="M18.5 24h11" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      </svg>
+    ),
     label: 'Bespoke',
   },
 ];
@@ -64,7 +89,9 @@ export default async function HomePage() {
                 i < categories.length - 1 ? 'border-r border-[rgba(240,192,64,0.15)]' : ''
               } ${i < 2 ? 'border-b md:border-b-0 border-[rgba(240,192,64,0.15)]' : ''}`}
             >
-              <span className="text-3xl mb-1">{cat.icon}</span>
+              <span className="w-12 h-12 mb-1 rounded-full border border-[rgba(240,192,64,0.22)] bg-[rgba(240,192,64,0.04)] flex items-center justify-center text-gold">
+                <span className="w-6 h-6">{cat.icon}</span>
+              </span>
               <span className="font-playfair text-sm">{cat.name}</span>
               <span className="text-[0.7rem] tracking-[0.15em] text-gold">{cat.label}</span>
             </Link>
@@ -94,9 +121,9 @@ export default async function HomePage() {
           ) : (
             <div className="grid md:grid-cols-3 gap-px bg-[rgba(240,192,64,0.12)]">
               {[
-                { name: 'Antique Dining Table Restoration', category: 'Wood Antiques Restoration', price: 15000 },
-                { name: 'Custom Gypsum TV Wall Unit', category: 'Gypsum Design & Interiors', price: 45000 },
-                { name: 'Gypsum Ceiling Design & Installation', category: 'Gypsum Design & Interiors', price: 30000 },
+                { name: 'Antique Dining Table Restoration', category: 'Wood Antiques Restoration' },
+                { name: 'Custom Gypsum TV Wall Unit', category: 'Gypsum Design & Interiors' },
+                { name: 'Gypsum Ceiling Design & Installation', category: 'Gypsum Design & Interiors' },
               ].map((p) => (
                 <div key={p.name} className="bg-aurora-card p-5">
                   <div className="aspect-[4/3] bg-[#161616] border border-[rgba(240,192,64,0.1)] mb-4 flex items-center justify-center">
@@ -104,7 +131,7 @@ export default async function HomePage() {
                   </div>
                   <div className="text-[0.68rem] tracking-widest uppercase text-gold mb-1">{p.category}</div>
                   <div className="font-playfair text-sm mb-3">{p.name}</div>
-                  <div className="text-aurora-text text-sm">Rs. {p.price.toLocaleString()}</div>
+                  <div className="text-aurora-text text-sm">Price on request</div>
                 </div>
               ))}
             </div>

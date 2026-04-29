@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const faqs = [
   {
-    q: 'Do you ship across Canada?',
-    a: 'Yes. We deliver across Ontario and ship nationwide across Canada. Shipping costs depend on weight and distance; contact us for a quote.',
+    q: 'Do you ship across North America?',
+    a: 'Yes. We deliver across Ontario and ship nationwide across North America. Shipping costs depend on weight and distance; contact us for a quote.',
   },
   {
     q: 'Can I place a custom order?',

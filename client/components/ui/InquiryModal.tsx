@@ -12,6 +12,16 @@ interface Props {
   price?: number;
 }
 
+function formatPrice(price?: number) {
+  return price != null
+    ? new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        maximumFractionDigits: 0,
+      }).format(price)
+    : 'Price on request';
+}
+
 export default function InquiryModal({ open, onClose, productId, productName, price }: Props) {
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
   const [loading, setLoading] = useState(false);
@@ -54,10 +64,10 @@ export default function InquiryModal({ open, onClose, productId, productName, pr
             >
               ✕
             </button>
-            <h2 className="font-playfair text-xl font-normal mb-1">Inquire to Order</h2>
+            <h2 className="font-playfair text-xl font-normal mb-1">Get Quotation</h2>
             {productName && (
               <p className="text-aurora-muted text-sm mb-6">
-                {productName} — Rs. {price?.toLocaleString()}
+                {productName} — {formatPrice(price)}
               </p>
             )}
 
