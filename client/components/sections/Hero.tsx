@@ -23,10 +23,10 @@ export default function Hero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.9, ease: 'easeOut' }}
         >
-          <div className="section-label mb-6">London, Ontario · Est. 2018</div>
+          <div className="section-label mb-6">North America · Est. 2018</div>
           <h1 className="font-playfair text-5xl md:text-6xl leading-[1.08] font-normal mb-6">
-            Crafted in<br />
-            <em className="text-gold not-italic">Concrete.</em><br />
+            Crafted to<br />
+            <em className="text-gold not-italic">Impress.</em><br />
             Built to Last.
           </h1>
           <p className="text-aurora-muted text-base leading-relaxed font-light mb-8 max-w-md">
@@ -38,7 +38,7 @@ export default function Hero() {
           </div>
 
           <div className="flex gap-10 mt-10 pt-8 border-t border-[rgba(240,192,64,0.15)]">
-            {[['200+', 'Pieces Crafted'], ['8+', 'Years Experience'], ['100%', 'Handmade']].map(
+            {[['200+', 'Pieces Crafted'], ['37+', 'Years Experience'], ['100%', 'Handmade']].map(
               ([num, label]) => (
                 <div key={label}>
                   <span className="font-playfair text-2xl text-gold block">{num}</span>

@@ -126,11 +126,11 @@ export default async function HomePage() {
           <div>
             <div className="section-label">Our Story</div>
             <h2 className="font-playfair text-3xl md:text-4xl font-normal mb-4">
-              35+ Years of Craft & Precision
+              37+ Years of Craft & Precision
             </h2>
             <div className="w-16 gold-divider mb-6" />
             <p className="text-aurora-muted leading-[1.9] text-base font-light mb-4">
-              Aurora Living Designs brings over 35 years of hands-on expertise to every project. From restoring irreplaceable wooden antiques to designing statement gypsum feature walls, every detail is handled personally by our team.
+              Aurora Living Designs brings over 37 years of hands-on expertise to every project. From restoring irreplaceable wooden antiques to designing statement gypsum feature walls, every detail is handled personally by our team.
             </p>
             <p className="text-aurora-muted leading-[1.9] text-base font-light mb-8">
               We work with homeowners, interior designers, and developers who value craftsmanship over shortcuts. No subcontracting. No compromises.

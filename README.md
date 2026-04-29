@@ -201,7 +201,7 @@ Token sent as `Authorization: Bearer <token>` header AND stored in an httpOnly c
 2. **Category Strip** — 4 category quick-links
 3. **Featured Products** — 3 featured products from DB
 4. **About Strip** — Workshop story + 3-step process
-5. **StatsBar** — Count-up animation: 500+ Projects, 15+ Years, 200+ Designs, 100% Handmade
+5. **StatsBar** — Count-up animation: 500+ Projects, 37+ Years, 200+ Designs, 100% Handmade
 6. **ProcessSection** — 3-step "How It's Made" with gold connecting line
 7. **Testimonials** — 8 reviews in dual-row infinite marquee (pauses on hover)
 8. **FAQSection** — 8 accordion FAQ items with AnimatePresence

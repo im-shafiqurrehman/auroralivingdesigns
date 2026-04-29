@@ -23,7 +23,7 @@ export default function AboutPage() {
                 Our work is built for clients who want more than standard finishes. From antique restoration to custom gypsum features and outdoor installations, we create spaces and pieces that stand out.
               </p>
               <p className="text-aurora-muted text-base leading-[1.9] font-light">
-                With 35+ years of experience in the field, we approach every project with an eye for detail, balance, and lasting quality.
+                With 37+ years of experience in the field, we approach every project with an eye for detail, balance, and lasting quality.
               </p>
             </div>
             <div>
@@ -74,7 +74,7 @@ export default function AboutPage() {
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <div>
                 <div className="section-label">Experience</div>
-                <h2 className="font-playfair text-3xl font-normal mt-2">35+ years of hands-on expertise</h2>
+                <h2 className="font-playfair text-3xl font-normal mt-2">37+ years of hands-on expertise</h2>
               </div>
               <p className="text-aurora-muted text-sm leading-relaxed font-light max-w-2xl md:text-right">
                 Every project benefits from decades of practical knowledge, careful finishing, and an understanding of how materials age, perform, and elevate a space over time.

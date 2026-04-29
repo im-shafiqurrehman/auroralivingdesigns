@@ -25,7 +25,7 @@ const faqs = [
   },
   {
     q: 'Do you install the fountain on-site?',
-    a: 'We offer installation services in the London, Ontario area. For other regions, we provide a detailed installation guide with every order.',
+    a: 'We offer installation services across North America. For other regions, we provide a detailed installation guide with every order.',
   },
   {
     q: 'What materials do you use?',

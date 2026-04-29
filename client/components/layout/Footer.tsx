@@ -22,7 +22,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-aurora-muted text-sm leading-relaxed font-light mb-4">
-              Handcrafted concrete medallions, fountains, and sculptures for spaces that demand permanence. Based in London, Ontario, Canada.
+              Handcrafted concrete medallions, fountains, and sculptures for spaces that demand permanence. Based in North America.
             </p>
             <div className="text-gold text-xs tracking-widest">auroralivingdesigns.online</div>
           </div>
@@ -50,7 +50,7 @@ export default function Footer() {
               links: [
                 { href: 'mailto:info@auroralivingdesigns.online', label: 'info@auroralivingdesigns.online' },
                 { href: 'https://wa.me/12269981419', label: '+1 (226) 998-1419 (WhatsApp)' },
-                { href: 'https://www.google.com/maps?q=280+Hamilton+Rd,+London,+Ontario', label: '280 Hamilton Rd, London, Ontario' },
+                { href: 'https://www.google.com/maps?q=280+Hamilton+Rd,+North+America', label: '280 Hamilton Rd, North America' },
               ],
             },
           ].map((col) => (

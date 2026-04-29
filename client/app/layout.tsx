@@ -21,7 +21,7 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   title: 'Aurora Living Designs — Handcrafted Concrete Works',
   description:
-    'Premium handcrafted concrete ceiling medallions, garden fountains, and decorative sculptures. Based in London, Ontario, Canada.',
+    'Premium handcrafted concrete ceiling medallions, garden fountains, and decorative sculptures. Based in North America.',
   keywords: 'concrete medallions, garden fountains, concrete sculptures, London Ontario, handcrafted',
   icons: {
     icon: '/favicon.png',
