@@ -145,7 +145,7 @@ export default async function HomePage() {
           <div className="relative">
             <div className="absolute -top-4 -left-4 right-4 bottom-4 border border-[rgba(240,192,64,0.2)] z-0" />
             <img
-              src="/workshop.jpg"
+              src="/workshop.png"
               alt="Workshop"
               className="relative z-10 w-full h-96 object-cover brightness-90 contrast-110"
             />

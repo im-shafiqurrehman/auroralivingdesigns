@@ -221,7 +221,6 @@ export default function NewProductPage() {
             </div>
             <input
               className={inputClass}
-              placeholder="Optional"
               placeholder="A brief one-line description shown in product listings..."
               value={form.shortDescription}
               onChange={(e) => set('shortDescription', e.target.value)}
