@@ -54,27 +54,27 @@ export default function Hero() {
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.9, ease: 'easeOut', delay: 0.15 }}
-          className="grid grid-cols-2 gap-3"
+          className="grid grid-cols-2 gap-4 justify-items-center"
         >
-          <div className="col-span-2 relative border border-[rgba(240,192,64,0.2)] bg-[#111111]">
+          <div className="col-span-2 relative w-full max-w-[460px] aspect-[4/3] border border-[rgba(240,192,64,0.2)] bg-[#111111] overflow-hidden">
             <img
-              src="https://placehold.co/700x360/111111/f0c040?text=Victorian+Ceiling+Medallion"
-              alt="Ceiling medallion"
-              className="w-full h-64 object-contain"
+              src="/hero_img1.png"
+              alt="Victorian ceiling medallion"
+              className="w-full h-full object-contain"
             />
           </div>
-          <div className="relative border border-[rgba(240,192,64,0.2)] bg-[#111111]">
+          <div className="relative w-full max-w-[220px] aspect-[3/4] border border-[rgba(240,192,64,0.2)] bg-[#111111] overflow-hidden">
             <img
-              src="https://placehold.co/340x200/161616/f0c040?text=Garden+Fountain"
+              src="/hero-img2.png"
               alt="Garden fountain"
-              className="w-full h-40 object-contain"
+              className="w-full h-full object-contain"
             />
           </div>
-          <div className="relative border border-[rgba(240,192,64,0.2)] bg-[#111111]">
+          <div className="relative w-full max-w-[220px] aspect-[3/4] border border-[rgba(240,192,64,0.2)] bg-[#111111] overflow-hidden">
             <img
-              src="https://placehold.co/340x200/111111/b8942a?text=Lion+Plaque"
-              alt="Lion sculpture"
-              className="w-full h-40 object-contain"
+              src="/hero-imng3.png"
+              alt="Lion plaque"
+              className="w-full h-full object-contain"
             />
           </div>
         </motion.div>

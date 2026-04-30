@@ -6,14 +6,6 @@ import api from '@/lib/api';
 import ProductCard from '@/components/ui/ProductCard';
 import Footer from '@/components/layout/Footer';
 
-const CATEGORIES = [
-  { label: 'All', value: '' },
-  { label: 'Garden Fountains', value: 'garden-fountains' },
-  { label: 'Ceiling Medallions', value: 'ceiling-medallions' },
-  { label: 'Sculptures', value: 'sculptures' },
-  { label: 'Custom Pieces', value: 'custom-pieces' },
-];
-
 const SORTS = [
   { label: 'Newest First', value: 'newest' },
   { label: 'Price: Low to High', value: 'price-asc' },
@@ -31,20 +23,39 @@ interface ProductType {
   category: { name: string; slug: string };
 }
 
+interface CategoryType {
+  _id: string;
+  name: string;
+  slug: string;
+}
+
 export default function ProductsPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [products, setProducts] = useState<ProductType[]>([]);
+  const [categories, setCategories] = useState<CategoryType[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState(searchParams.get('category') || '');
   const [sort, setSort] = useState('newest');
   const [page, setPage] = useState(1);
 
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const { data } = await api.get('/categories');
+        setCategories(data);
+      } catch {
+        setCategories([]);
+      }
+    };
+    fetchCategories();
+  }, []);
+
   const fetchProducts = useCallback(async () => {
     setLoading(true);
     try {
-      const params = new URLSearchParams({ sort, page: String(page), limit: '9' });
+      const params = new URLSearchParams({ sort, page: String(page), limit: '100' });
       if (category) params.set('category', category);
       const { data } = await api.get(`/products?${params}`);
       setProducts(data.products);
@@ -86,15 +97,23 @@ export default function ProductsPage() {
             </div>
             <div className="mb-6">
               <div className="text-[0.7rem] tracking-[0.2em] uppercase text-gold mb-3">Category</div>
-              {CATEGORIES.map((c) => (
+              <button
+                onClick={() => handleCategory('')}
+                className={`block w-full text-left py-2 text-sm transition-colors ${
+                  category === '' ? 'text-gold' : 'text-aurora-muted hover:text-aurora-text'
+                }`}
+              >
+                All
+              </button>
+              {categories.map((c) => (
                 <button
-                  key={c.value}
-                  onClick={() => handleCategory(c.value)}
+                  key={c._id}
+                  onClick={() => handleCategory(c.slug)}
                   className={`block w-full text-left py-2 text-sm transition-colors ${
-                    category === c.value ? 'text-gold' : 'text-aurora-muted hover:text-aurora-text'
+                    category === c.slug ? 'text-gold' : 'text-aurora-muted hover:text-aurora-text'
                   }`}
                 >
-                  {c.label}
+                  {c.name}
                 </button>
               ))}
             </div>
@@ -118,7 +137,7 @@ export default function ProductsPage() {
 
           {loading ? (
             <div className="grid md:grid-cols-3 gap-px bg-[rgba(240,192,64,0.1)]">
-              {Array.from({ length: 6 }).map((_, i) => (
+              {Array.from({ length: 9 }).map((_, i) => (
                 <div key={i} className="bg-aurora-card animate-pulse">
                   <div className="aspect-[4/3] bg-[#1a1a1a]" />
                   <div className="p-5 space-y-2">

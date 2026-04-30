@@ -12,7 +12,10 @@ import ProductCard from '@/components/ui/ProductCard';
 
 async function getFeaturedProducts() {
   try {
-    const { data } = await api.get('/products?featured=true&limit=15');
+    const ts = Date.now();
+    const { data } = await api.get(`/products?featured=true&limit=15&_=${ts}`, {
+      headers: { 'Cache-Control': 'no-cache' },
+    });
     return data.products;
   } catch {
     return [];
