@@ -12,12 +12,15 @@ import ProductCard from '@/components/ui/ProductCard';
 
 async function getFeaturedProducts() {
   try {
-    const { data } = await api.get('/products?featured=true&limit=3');
+    const { data } = await api.get('/products?featured=true&limit=15');
     return data.products;
   } catch {
     return [];
   }
 }
+
+// Ensure this page is rendered dynamically on the server so data is always fresh
+export const dynamic = 'force-dynamic';
 
 const categories = [
   {

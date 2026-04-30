@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 
 const tiles = [
   { src: '/1.jpg', alt: 'Craft piece 1' },
-  { src: '/2.jpg', alt: 'Craft piece 2' },
-  { src: '/3.jpg', alt: 'Craft piece 3' },
+  { src: '/2.png', alt: 'Craft piece 2' },
+  { src: '/3.png', alt: 'Craft piece 3' },
   { src: '/4.jpg', alt: 'Craft piece 4' },
   { src: '/5.jpg', alt: 'Craft piece 5' },
   { src: '/6.jpg', alt: 'Craft piece 6' },
