@@ -1,8 +1,8 @@
 # Aurora Living Designs — Full Stack Application
 
-**Handcrafted Concrete Works | Lahore, Pakistan**
+**Luxury Concrete Crafts | London, Ontario (est. 2018)**
 
-A premium full-stack e-commerce platform for handcrafted concrete ceiling medallions, garden fountains, and decorative sculptures. Built with Next.js 14, Express.js, MongoDB, and Cloudinary.
+A premium full-stack catalog and inquiry platform for handcrafted architectural and decorative concrete pieces. Built with Next.js 14 (App Router), Express.js, MongoDB (Mongoose), and Cloudinary.
 
 ---
 
@@ -39,11 +39,73 @@ aurora-living-designs/
 └── server/                   ← Express.js REST API
     ├── controllers/          ← auth, product, category, inquiry
     ├── middleware/           ← protect.js, isAdmin.js, cloudinary.js
-    ├── models/               ← User, Product, Category, Inquiry
+    ├── models/               ← User, Product, Category, Inquiry, Setting
     ├── routes/               ← auth, products, categories, inquiries, admin
     ├── seed/
     │   └── seed.js           ← Database seeder
     └── server.js
+```
+
+---
+
+## System Design Architecture
+
+The system is a two-tier web application: a Next.js frontend for browsing and admin UX, backed by an Express REST API that owns authentication, persistence, and media uploads.
+
+```mermaid
+flowchart TB
+  %% Client tier
+  U[Visitor / Client] -->|HTTPS| N[Next.js 14 Web App<br/>client/]
+
+  %% Application tier
+  N -->|REST: /api/*<br/>Axios withCredentials| A[Express API<br/>server/server.js]
+
+  %% Data + media
+  A -->|Mongoose| DB[(MongoDB<br/>Users / Categories / Products / Inquiries / Settings)]
+  A -->|Upload & transform| C[(Cloudinary)]
+
+  %% Admin access path
+  U -->|/admin/*| MW[Next.js Edge Middleware<br/>client/middleware.ts]
+  MW -->|Requires cookie: aurora_token| N
+
+  %% Auth paths
+  N -->|POST /api/auth/login| A
+  A -->|Sets httpOnly cookie: token| U
+  N -->|Stores token in localStorage + cookie: aurora_token| U
+
+  %% Notes
+  classDef subtle fill:#111,stroke:#333,color:#ddd;
+  class DB,C subtle;
+```
+
+```mermaid
+sequenceDiagram
+  autonumber
+  participant Browser
+  participant Next as Next.js (client)
+  participant API as Express API (server)
+  participant DB as MongoDB
+
+  rect rgb(245,245,245)
+    Note over Browser,API: Authentication (dual-channel token)
+    Browser->>Next: Submit login form
+    Next->>API: POST /api/auth/login (email, password)
+    API->>DB: Find user + verify password
+    DB-->>API: User document
+    API-->>Browser: 200 + JSON { token, role, ... } + Set-Cookie: token=httpOnly
+    Next-->>Browser: Save token to localStorage + cookie aurora_token (non-httpOnly)
+    Next->>API: GET /api/auth/me (Bearer token)
+    API-->>Next: User (no password)
+  end
+
+  rect rgb(245,245,245)
+    Note over Browser,API: Inquiry (public)
+    Browser->>Next: Submit inquiry (optionally tied to product)
+    Next->>API: POST /api/inquiries (name, email, message, productRef?)
+    API->>DB: Insert Inquiry(status="new")
+    DB-->>API: Inquiry _id
+    API-->>Next: 201 Created
+  end
 ```
 
 ---
@@ -229,20 +291,93 @@ Token sent as `Authorization: Bearer <token>` header AND stored in an httpOnly c
 
 ```
 User logs in → POST /api/auth/login
-  → JWT stored in localStorage (aurora_token)
-  → JWT stored in httpOnly cookie (aurora_token)
+  → JWT returned in JSON body as token
+  → Server sets httpOnly cookie: token
+  → Client stores token in localStorage (aurora_token)
+  → Client also sets a non-httpOnly cookie (aurora_token) for Next.js Edge Middleware
   → AuthProvider reads token on mount → calls /api/auth/me
   → Zustand store hydrated with { user, token, isAdmin }
 
 Admin navigates to /admin/* →
-  → Next.js middleware checks cookie (edge, fast)
+  → Next.js middleware checks cookie (aurora_token) at the edge (fast gate)
   → AdminLayout checks isAdmin (client-side, confirms role)
   → Redirect to /login if either check fails
 
 Logout →
-  → localStorage cleared
-  → Cookie deleted
+  → localStorage cleared (aurora_token)
+  → Client cookie deleted (aurora_token)
+  → Server cookie cleared (token)
   → Store reset → redirect to /
+```
+
+---
+
+## Database Design (MongoDB)
+
+Collections are modeled with Mongoose. Relationships are represented via `ObjectId` references (e.g., `Product.category → Category._id`).
+
+```mermaid
+erDiagram
+  USER {
+    ObjectId _id PK
+    string name
+    string email UK
+    string password
+    string role "user|admin"
+    date createdAt
+    date updatedAt
+  }
+
+  CATEGORY {
+    ObjectId _id PK
+    string name
+    string slug UK
+    string description
+    string image
+    date createdAt
+    date updatedAt
+  }
+
+  PRODUCT {
+    ObjectId _id PK
+    string name
+    string slug UK
+    ObjectId category FK
+    string shortDescription
+    string longDescription
+    number price
+    string dimensions
+    string weight
+    string material
+    string[] images
+    boolean inStock
+    boolean featured
+    date createdAt
+    date updatedAt
+  }
+
+  INQUIRY {
+    ObjectId _id PK
+    string name
+    string email
+    string phone
+    string message
+    ObjectId productRef FK "nullable"
+    string status "new|read|replied"
+    date createdAt
+    date updatedAt
+  }
+
+  SETTING {
+    ObjectId _id PK
+    string key UK
+    mixed value
+    date createdAt
+    date updatedAt
+  }
+
+  CATEGORY ||--o{ PRODUCT : contains
+  PRODUCT  ||--o{ INQUIRY : "referenced by (optional)"
 ```
 
 ---
