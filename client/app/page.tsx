@@ -149,9 +149,9 @@ export default async function HomePage() {
       <section className="py-24 px-6 bg-aurora-card">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-20 items-center">
           <div className="relative">
-            <div className="absolute -top-4 -left-4 right-4 bottom-4 border border-[rgba(240,192,64,0.2)] z-0" />
+            <div className="absolute right-4 bottom-4 border  z-0" />
             <img
-              src="/workshop.png"
+              src="/5.jpeg"
               alt="Workshop"
               className="relative z-10 w-full h-96 object-cover brightness-90 contrast-110"
             />

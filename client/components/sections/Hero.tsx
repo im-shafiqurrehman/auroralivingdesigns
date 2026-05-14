@@ -58,25 +58,12 @@ export default function Hero() {
         >
           <div className="col-span-2 relative w-full max-w-[460px] aspect-[4/3] border border-[rgba(240,192,64,0.2)] bg-[#111111] overflow-hidden">
             <img
-              src="/hero_img1.png"
+              src="/6.jpeg"
               alt="Victorian ceiling medallion"
               className="w-full h-full object-contain"
             />
           </div>
-          <div className="relative w-full max-w-[220px] aspect-[3/4] border border-[rgba(240,192,64,0.2)] bg-[#111111] overflow-hidden">
-            <img
-              src="/hero-img2.png"
-              alt="Garden fountain"
-              className="w-full h-full object-contain"
-            />
-          </div>
-          <div className="relative w-full max-w-[220px] aspect-[3/4] border border-[rgba(240,192,64,0.2)] bg-[#111111] overflow-hidden">
-            <img
-              src="/hero-imng3.png"
-              alt="Lion plaque"
-              className="w-full h-full object-contain"
-            />
-          </div>
+         
         </motion.div>
       </div>
     </section>

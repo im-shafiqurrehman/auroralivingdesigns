@@ -2,12 +2,12 @@
 import { motion } from 'framer-motion';
 
 const tiles = [
-  { src: '/1.jpg', alt: 'Craft piece 1' },
-  { src: '/2.png', alt: 'Craft piece 2' },
-  { src: '/3.png', alt: 'Craft piece 3' },
-  { src: '/4.jpg', alt: 'Craft piece 4' },
-  { src: '/5.jpg', alt: 'Craft piece 5' },
-  { src: '/6.png', alt: 'Craft piece 6' },
+  { src: '/1.jpeg', alt: 'Craft piece 1' },
+  { src: '/2.jpeg', alt: 'Craft piece 2' },
+  { src: '/3.jpeg', alt: 'Craft piece 3' },
+  { src: '/4.jpeg', alt: 'Craft piece 4' },
+  { src: '/5.jpeg', alt: 'Craft piece 5' },
+  { src: '/6.jpeg', alt: 'Craft piece 6' },
 ];
 
 export default function GalleryStrip() {
