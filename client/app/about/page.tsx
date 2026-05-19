@@ -28,7 +28,7 @@ export default function AboutPage() {
             </div>
             <div>
               <img
-                src="/workshop.png"
+                src="/about.jpeg"
                 alt="Aurora Living Designs workshop"
                 className="w-full h-80 object-cover border border-[rgba(240,192,64,0.2)] brightness-90"
               />
