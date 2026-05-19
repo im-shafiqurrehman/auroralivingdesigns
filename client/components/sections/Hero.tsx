@@ -58,7 +58,7 @@ export default function Hero() {
         >
           <div className="col-span-2 relative w-full max-w-[460px] aspect-[4/3] border border-[rgba(240,192,64,0.2)] bg-[#111111] overflow-hidden">
             <img
-              src="/6.jpeg"
+              src="/2.jpeg"
               alt="Victorian ceiling medallion"
               className="w-full h-full object-contain"
             />
