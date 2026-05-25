@@ -50,7 +50,7 @@ export default function Footer() {
               links: [
                 { href: 'mailto:info@auroralivingdesigns.online', label: 'info@auroralivingdesigns.online' },
                 { href: 'https://wa.me/12269981419', label: '+1 (226) 998-1419 (WhatsApp)' },
-                { href: 'https://www.google.com/maps?q=280+Hamilton+Rd,+North+America', label: '280 Hamilton Rd, North America' },
+                { href: 'https://www.google.com/maps?q=280+Hamilton+road,+london,+ontario', label: '280 Hamilton road, london, ontario' },
               ],
             },
           ].map((col) => (

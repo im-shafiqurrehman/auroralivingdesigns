@@ -12,8 +12,8 @@ const DEFAULT_STORE_CONFIG = {
   storeName: 'Aurora Living Designs',
   contactEmail: 'info@auroralivingdesigns.online',
   whatsapp: '+1 (226) 998-1419',
-  location: '280 Hamilton Rd, North America',
-  mapUrl: 'https://www.google.com/maps?q=280+Hamilton+Rd,+North+America',
+  location: '280 Hamilton road, london, ontario',
+  mapUrl: 'https://www.google.com/maps?q=280+Hamilton+road,+london,+ontario',
 };
 
 const STORE_SETTINGS_KEY = 'store-config';

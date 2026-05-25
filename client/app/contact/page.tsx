@@ -37,8 +37,8 @@ export default function ContactPage() {
                 We work directly with clients to deliver pieces that fit their space perfectly. Tell us what you have in mind — we respond within one business day.
               </p>
               {[
-                ['📍', 'Location', '280 Hamilton Rd, North America'],
-                ['🗺️', 'Map', '280 Hamilton Rd, North America'],
+                ['📍', 'Location', '280 Hamilton road, london, ontario'],
+                ['🗺️', 'Map', '280 Hamilton road, london, ontario'],
                 ['✉', 'Email', 'info@auroralivingdesigns.online'],
                 ['💬', 'WhatsApp', '+1 (226) 998-1419'],
                 ['🌐', 'Website', 'auroralivingdesigns.online'],
@@ -55,7 +55,7 @@ export default function ContactPage() {
               <div className="mt-8 border border-[rgba(240,192,64,0.2)] bg-aurora-card overflow-hidden">
                 <iframe
                   title="Aurora Living Designs Map"
-                  src="https://www.google.com/maps?q=280+Hamilton+Rd,+London,+Ontario&output=embed"
+                  src="https://www.google.com/maps?q=280+Hamilton+road,+london,+ontario&output=embed"
                   width="100%"
                   height="280"
                   style={{ border: 0 }}
