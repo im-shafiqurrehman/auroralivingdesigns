@@ -39,9 +39,9 @@ export default function ContactPage() {
               {[
                 ['📍', 'Location', '280 Hamilton road, london, ontario'],
                 ['🗺️', 'Map', '280 Hamilton road, london, ontario'],
-                ['✉', 'Email', 'info@auroralivingdesigns.online'],
+                ['✉', 'Email', 'info@auroralivingdesigns.com'],
                 ['💬', 'WhatsApp', '+1 (226) 998-1419'],
-                ['🌐', 'Website', 'auroralivingdesigns.online'],
+                ['🌐', 'Website', 'auroralivingdesigns.com'],
               ].map(([icon, label, value]) => (
                 <div key={label} className="flex gap-4 mb-6">
                   <span className="text-gold mt-1 min-w-[20px]">{icon}</span>

@@ -24,7 +24,7 @@ export default function Footer() {
             <p className="text-aurora-muted text-sm leading-relaxed font-light mb-4">
               Handcrafted concrete medallions, fountains, and sculptures for spaces that demand permanence. Based in North America.
             </p>
-            <div className="text-gold text-xs tracking-widest">auroralivingdesigns.online</div>
+            <div className="text-gold text-xs tracking-widest">auroralivingdesigns.com</div>
           </div>
 
           {[
@@ -48,7 +48,7 @@ export default function Footer() {
             {
               title: 'Contact',
               links: [
-                { href: 'mailto:info@auroralivingdesigns.online', label: 'info@auroralivingdesigns.online' },
+                { href: 'mailto:info@auroralivingdesigns.com', label: 'info@auroralivingdesigns.com' },
                 { href: 'https://wa.me/12269981419', label: '+1 (226) 998-1419 (WhatsApp)' },
                 { href: 'https://www.google.com/maps?q=280+Hamilton+road,+london,+ontario', label: '280 Hamilton road, london, ontario' },
               ],
@@ -71,7 +71,7 @@ export default function Footer() {
 
         <div className="flex flex-col md:flex-row items-center justify-between pt-8 gap-4">
           <p className="text-aurora-muted text-xs">© {new Date().getFullYear()} Aurora Living Designs. All rights reserved.</p>
-          <p className="text-gold text-xs tracking-widest">auroralivingdesigns.online</p>
+          <p className="text-gold text-xs tracking-widest">auroralivingdesigns.com</p>
         </div>
       </div>
     </footer>

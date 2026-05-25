@@ -10,7 +10,7 @@ const Setting = require('../models/Setting');
 
 const DEFAULT_STORE_CONFIG = {
   storeName: 'Aurora Living Designs',
-  contactEmail: 'info@auroralivingdesigns.online',
+  contactEmail: 'info@auroralivingdesigns.com',
   whatsapp: '+1 (226) 998-1419',
   location: '280 Hamilton road, london, ontario',
   mapUrl: 'https://www.google.com/maps?q=280+Hamilton+road,+london,+ontario',
