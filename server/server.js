@@ -63,7 +63,7 @@ const defaultAllowedOrigins = [
   'https://auroralivingdesigns.vercel.app',
   'https://auroralivingdesigns-cvj6.vercel.app',
   'https://auroralivingdesigns.online',
-  'https://www.auroralivingdesigns.online',
+  'https://www.auroralivingdesigns.com',
 ];
 
 const allowedOrigins = new Set([
